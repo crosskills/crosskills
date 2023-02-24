@@ -1,0 +1,19 @@
+{
+  "name": "crosskills",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adilelmoba/crosskills.git"
+  },
+  "author": "High Five",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adilelmoba/crosskills/issues"
+  },
+  "homepage": "https://github.com/adilelmoba/crosskills#readme"
+}
