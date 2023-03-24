@@ -9,6 +9,8 @@ module.exports = {
       'black': '#000000',
       'white': '#FFFFFF',
       'red': '#FF0000',
+      'gray': '#F7F7F7',
+      'sky': 'rgb(45, 105, 209, 0.1)'
     },
   },
   plugins: [],

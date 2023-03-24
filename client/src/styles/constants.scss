@@ -14,6 +14,30 @@
       border: 2px solid $blue;
   }
 }
+.btn-plain-return{
+  background-color: white;
+  border-radius: 50px;
+  color: $blue;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  border:2px solid $blue;
+}
+
+.btn-tab{
+  background-color: $blue;
+  border-radius: 50px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  border:2px solid $blue;
+
+}
 
 .btn-tab{
   background-color: $blue;
@@ -42,6 +66,19 @@
     background-color: $blue;
     color: white;
   }
+}
+
+.btn-empty-hidden{
+  background-color: grey;
+  border-radius: 50px;
+  color: grey;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  border:2px solid grey;
+
 }
 
 .btn-tab_empty[data-active='true']{
