@@ -28,7 +28,6 @@ const Onboarding = () => {
 
 
     const register = async () => {
-
             createUserWithEmailAndPassword(
                 auth,
                 authRefs.registerEmailInput.current.value,
@@ -52,8 +51,11 @@ const Onboarding = () => {
                 history("/");
             })
             .catch((error) => {
+                console.log(error.message)
                 if (error.code === "auth/email-already-in-use") {
                     setAuthError("Un compte existe déjà avec cette adresse email.")
+                }else if(error.code === "auth/weak-password"){
+                    setAuthError("Le mot de passe doit être de plus de 6 caractères.")
                 }else{
                     setAuthError(error.message)
                 }
