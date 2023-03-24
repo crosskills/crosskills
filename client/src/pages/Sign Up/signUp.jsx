@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signOut,
 } from "firebase/auth";
 import { auth, database } from "../../services/firebase";
 
@@ -34,8 +32,6 @@ function SignUp() {
             setAuthError(error.message)
         }
     };
-
-
 
     return (
         <div className="App">

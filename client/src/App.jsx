@@ -5,6 +5,7 @@ import Login from "./pages/Login/login.jsx";
 import SignUp from "./pages/Sign Up/signUp.jsx";
 import { AuthProvider } from "./services/auth";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
+import Onboarding from "./pages/Onboarding/Onboarding";
 
 function App() {
   return(
@@ -14,8 +15,8 @@ function App() {
                   <Route exact path='/' element={<PrivateRoute/>}>
                       <Route exact path='/' element={<Home/>}/>
                   </Route>
+                  <Route exact path="/onboarding" element={<Onboarding/>} />
                   <Route exact path="/login" element={<Login/>} />
-                  <Route exact path="/signup" element={<SignUp/>} />
               </Routes>
           </Router>
       </AuthProvider>
