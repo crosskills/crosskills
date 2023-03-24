@@ -1,3 +1,30 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'colors.scss';
+@import 'constants.scss';
+
+body{
+  height: 100vh;
+  width: 100vw;
+  font-family: Montserrat;
+  color: $blue;
+}
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+h1{
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: Montserrat;
+  font-style: italic;
+  color: $blue;
+}
+
+input{
+  border: 2px solid;
+  border-radius: 50px;
+  padding: 10px;
+}
