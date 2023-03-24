@@ -1,9 +1,9 @@
 import {React, useState, useEffect, useRef, useContext} from "react";
 import {collection, getDocs, addDoc, setDoc, doc} from "firebase/firestore";
 import { auth, database } from "../../services/firebase";
-import logo from "../../assets/logoBLeu.png";
-import onBoardingStudent from "../../assets/onboarding_learning.png";
-import onBoardingTeacher from "../../assets/onboarding_teacher.png";
+import logo from "../../assets/images/logoBLeu.png";
+import onBoardingStudent from "../../assets/images/onboarding_learning.png";
+import onBoardingTeacher from "../../assets/images/onboarding_teacher.png";
 import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import "./Onboarding.scss";

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import firebaseConfig from "./firebase";
 import { auth } from "./firebase";
 
+import { Loader } from "../components";
+
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -10,14 +12,14 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
-            console.log(user)
+            // console.log(user)
             setCurrentUser(user)
             setPending(false)
         });
     }, []);
 
     if(pending){
-        return <>Loading...</>
+        return <Loader />
     }
     return (
         <AuthContext.Provider

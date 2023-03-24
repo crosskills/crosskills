@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import {Route, Navigate, Outlet, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../services/auth";
-import logo from "../../assets/logoBLeu.png";
-import handshake from "../../assets/handshake.png";
+import logo from "../../assets/images/logoBLeu.png";
+import handshake from "../../assets/images/handshake.png";
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     const {currentUser} = useContext(AuthContext);
     const history = useNavigate();
-    console.log(currentUser);
+    // console.log(currentUser);
     const onboarding = () => {
         history("/onboarding");
     }
