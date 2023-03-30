@@ -4,3 +4,21 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+
+.dropdown-skills {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 1.25rem;
+  color: black;
+  background-color: #F7F7F7;
+  transition: height 1s ease-in-out;
+}
+.expand {
+  display: none;
+  height: 100px;
+  margin: 10px 0;
+  padding: 15px 5px;
+}
