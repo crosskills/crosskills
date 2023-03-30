@@ -13,6 +13,10 @@
       background-color: white;
       border: 2px solid $blue;
   }
+  @media screen and (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
 }
 
 .btn-tab{
