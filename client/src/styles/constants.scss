@@ -13,6 +13,10 @@
       background-color: white;
       border: 2px solid $blue;
   }
+  @media screen and (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
 }
 .btn-plain-return{
   background-color: white;
@@ -84,4 +88,24 @@
 .btn-tab_empty[data-active='true']{
   background-color: $blue;
   color: white;
+}
+
+.input-white{
+  background-color: white;
+  border: none !important;
+  border-radius: 50px;
+  color: $blue;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 6rem 1rem 2rem;
+  width: 100%;
+  box-shadow: rgba($blue, 0.25) 0px 13px 27px -5px, rgba($blue, 0.3) 0px 8px 16px -8px;
+  transition: color 0.3s ease-in-out;
+  &:focus{
+    outline: none;
+  }
+  &::placeholder {
+    font-size: 1rem;
+    color: rgba($blue, 0.8);
+  }
 }

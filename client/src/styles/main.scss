@@ -16,15 +16,51 @@ body{
 }
 
 h1{
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 900;
   font-family: Montserrat;
-  font-style: italic;
-  color: $blue;
+  color: black;
+}
+
+.title-hero{
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+    font-weight: 900;
+    font-family: Montserrat;
+    color: black;
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+    line-height: 2rem;
+    text-align: center;
+  }
+}
+
+.subtitle{
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: Montserrat;
+    color: black;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+    text-align: center;
+  }
 }
 
 input{
   border: 2px solid;
   border-radius: 50px;
   padding: 10px;
+}
+
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
