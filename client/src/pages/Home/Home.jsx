@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
@@ -9,6 +9,7 @@ import { auth, database } from "../../services/firebase";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../../services/auth";
+import {CurrentUserContext} from "../../components/CurrentUser/CurrentUserContext";
 
 
 import './Home.scss'
@@ -16,7 +17,8 @@ import './Home.scss'
 import { Navbar, Announcement } from "../../components";
 
 const Home = () => {
-    console.log(auth.currentUser);
+    const userData  = useContext(CurrentUserContext);
+    console.log(userData);
 
     const [announcements , setAnnouncements] = useState([]);
 
