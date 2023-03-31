@@ -1,13 +1,23 @@
+import { useEffect, useContext } from 'react';
+import { CurrentUserContext } from '../../components/CurrentUser/CurrentUserContext';
+
 import './Profile.scss'
 
 import { Navbar } from '../../components'
 import profileImage from '../../assets/images/profile_sample.jpg'
 
 const Profile = () => {
+    
+    // console.log(userData)
+    
+    const userData  = useContext(CurrentUserContext);
 
-    // console.log(currentUser)
+    const User = {
+        name: '',
+        age: '',
+    }
 
-  return (
+    return (
       <div className="py-10 px-2 md:px-10 profile text-black">
         <Navbar />
         
