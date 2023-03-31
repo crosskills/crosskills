@@ -17,13 +17,11 @@ const Announcement = ( { title } ) => {
         <div className="smallannouncement_content-infos">
           <div className="smallannouncement_content-infos-profile">
             <img src="https://i.ibb.co/YZpLJ2y/Adil-Baltazare-Minimized.png" alt="" />
-
             <p>avec Adil</p>
           </div>
 
           <div className="smallannouncement_content-infos-address">
-            <ImLocation2 />
-
+            <ImLocation2/>
             <p>La Courneuve</p>
           </div>
         </div>

@@ -4,6 +4,10 @@
 @import 'colors.scss';
 @import 'constants.scss';
 
+*{
+  font-family: Montserrat;
+}
+
 body{
   height: 100vh;
   width: 100vw;
@@ -16,12 +20,33 @@ body{
 }
 
 h1{
-  font-size: 3.5rem;
-  font-weight: 900;
+  font-size: 2.5rem;
+  font-weight: 700;
   font-family: Montserrat;
   color: black;
 }
 
+p{
+  font-family: Montserrat;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+}
+
+h3{
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Montserrat;
+  color: $blue;
+}
+
+h4{
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: Montserrat;
+    color: black;
+  text-transform: uppercase;
+}
 .title-hero{
     font-size: 3.5rem;
     line-height: 3.5rem;
@@ -44,12 +69,6 @@ h1{
     font-size: 1rem;
     text-align: center;
   }
-}
-
-input{
-  border: 2px solid;
-  border-radius: 50px;
-  padding: 10px;
 }
 
 .rotate {
