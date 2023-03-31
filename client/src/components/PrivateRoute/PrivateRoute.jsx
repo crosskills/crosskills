@@ -1,21 +1,16 @@
-import React, { useContext } from "react";
+import React, { createContext ,useContext } from "react";
 import {Route, Navigate, Outlet, useNavigate} from "react-router-dom";
 import { AuthContext } from "../../services/auth";
 import logo from "../../assets/images/logoBLeu.png";
 import handshake from "../../assets/images/handshake.png";
-import hero1 from "../../assets/images/hero-1.png";
-import hero2 from "../../assets/images/hero-2.png";
-import hero3 from "../../assets/images/hero-3.png";
-import hero4 from "../../assets/images/hero-4.png";
-import hero5 from "../../assets/images/hero-5.png";
-import hero6 from "../../assets/images/hero-6.png";
-import hero7 from "../../assets/images/hero-7.png";
 import herofull from "../../assets/images/hero-full.png";
+import {CurrentUserProvider} from "../CurrentUser/CurrentUserContext";
+
+const CurrentUserContext = createContext(null);
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     const {currentUser} = useContext(AuthContext);
     const history = useNavigate();
-    // console.log(currentUser);
     const onboarding = () => {
         history("/onboarding");
     }
@@ -24,7 +19,9 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     }
     return (
     currentUser ? (
-                    <Outlet />
+                    <CurrentUserProvider>
+                        <Outlet />
+                    </CurrentUserProvider>
                 ) : (
                     <div className="flex flex-col-reverse w-full h-full justify-center  onboarding p-[20px] gap-[40px] relative md:flex-row md:p-[60px] md:justify-start">
                         <img src={logo} alt="" className="max-w-[150px] md:max-w-[300px] absolute top-[20px] "/>
