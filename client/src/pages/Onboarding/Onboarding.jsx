@@ -1,13 +1,13 @@
 import {React, useState, useEffect, useRef, useContext} from "react";
 import {collection, getDocs, addDoc, setDoc, doc, updateDoc} from "firebase/firestore";
-import { auth, database } from "../../services/firebase";
+import { auth, database} from "../../services/firebase";
 
 import specifySkill from "../../assets/copines_ski.png"
 import logo from "../../assets/images/logoBLeu.png";
 import onBoardingStudent from "../../assets/images/onboarding_learning.png";
 import onBoardingTeacher from "../../assets/images/onboarding_teacher.png";
 import arrow from "../../assets/icons/arrow.svg";
-import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import {createUserWithEmailAndPassword, onAuthStateChanged,updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import "./Onboarding.scss";
 import {AuthContext} from "../../services/auth";
@@ -57,6 +57,9 @@ const Onboarding = () => {
                 authRefs.registerEmailInput.current.value,
                 authRefs.registerPasswordInput.current.value
             ).then((userCredential) => {
+                updateProfile(auth.currentUser, {
+                    displayName: authRefs.registerNameInput.current.value,
+                });
                 setAuthError("")
                 console.log(userCredential)
                 const user = userCredential.user;

@@ -15,7 +15,6 @@ import herofull from "../../assets/images/hero-full.png";
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     const {currentUser} = useContext(AuthContext);
     const history = useNavigate();
-    // console.log(currentUser);
     const onboarding = () => {
         history("/onboarding");
     }
