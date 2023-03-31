@@ -10,7 +10,7 @@ module.exports = {
       'white': '#FFFFFF',
       'red': '#FF0000',
       'gray': '#F7F7F7',
-      'sky': 'rgb(45, 105, 209, 0.1)'
+      'sky': '#E9F0FB'
     },
   },
   plugins: [],
