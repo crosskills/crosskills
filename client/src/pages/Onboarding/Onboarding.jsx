@@ -1,5 +1,5 @@
 import {React, useState, useEffect, useRef, useContext} from "react";
-import {collection, getDocs, addDoc, setDoc, doc} from "firebase/firestore";
+import {collection, getDocs, addDoc, setDoc, doc, updateDoc} from "firebase/firestore";
 import { auth, database } from "../../services/firebase";
 
 import specifySkill from "../../assets/copines_ski.png"
@@ -24,6 +24,8 @@ const Onboarding = () => {
     const [catTeacher, setCatTeacher] = useState("");
     const [searchIsOpen, setSearchIsOpen] = useState(false);
     const [userType, setUserType] = useState('student');
+    const [titreAnnonce, setTitreAnnonce] = useState("");
+    const [descAnnonce, setDescAnnonce] = useState("");
     const [categories, setCategories] = useState([]);
     const [userCat, setUserCat] = useState([]);
     const authRefs = {
@@ -39,6 +41,17 @@ const Onboarding = () => {
 
 
     const register = async () => {
+        let annonce = [];
+        if (userType === "student") {
+            annonce= [];
+        }else if(userType === "teacher"){
+            addDoc(collection(database, "Annonces"), {
+                Titre: titreAnnonce,
+                Description: descAnnonce,
+            }).then((docRef) => {
+                annonce.push(docRef.id);
+            })
+        }
             createUserWithEmailAndPassword(
                 auth,
                 authRefs.registerEmailInput.current.value,
@@ -47,13 +60,18 @@ const Onboarding = () => {
                 setAuthError("")
                 console.log(userCredential)
                 const user = userCredential.user;
+                if(userType === "teacher"){
+                    updateDoc(doc(database, "Annonces", annonce[0]), {
+                        Prof:user.uid,
+                    })
+                }
                 setDoc(doc(database, "Users", user.uid), {
                     email: user.email,
                     userType: userType,
                     categories: userCat,
                     prenom: authRefs.registerNameInput.current.value,
                     age: authRefs.registerAgeInput.current.value,
-                    annonces: [],
+                    annonces: annonce,
                     bio: "",
                     image: "",
                     nom: "",
@@ -302,8 +320,8 @@ const Onboarding = () => {
                                 <div className="flex gap-[20px] mt-[20px]">
                                     <button className={onboardingTeacherPannel == 1 ? 'btn-tab':onboardingTeacherPannel < 1 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 1 ? ()=>nextPannelTeacher(1): null}>1. Centres d'intérêt</button>
                                     <button className={onboardingTeacherPannel == 2 ? 'btn-tab':onboardingTeacherPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 2 ? ()=>nextPannelTeacher(2): null}>2. Descriptif</button>
-                                    <button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Descriptif</button>
-                                    <button className={onboardingTeacherPannel == 4 ? 'btn-tab':onboardingTeacherPannel < 4 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 4 ? ()=>nextPannelTeacher(4): null}>4. Compte</button>
+                                    {/*<button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Descriptif</button>*/}
+                                    <button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Compte</button>
                                 </div>
                                 {onboardingTeacherPannel == 1 ? (
                                         <div className="my-[40px] flex flex-col items-center w-2/3">
@@ -394,6 +412,7 @@ const Onboarding = () => {
                                                         className="w-full input-text"
                                                         type="text"
                                                         placeholder="Ex: Cours de piano"
+                                                        onChange={(e) => setTitreAnnonce(e.target.value)}
                                                         />
                                                     <h4 className="mt-[20px]"><span className="text-primary">Description</span> de votre annonce</h4>
                                                     <p>(150 mots maximum)</p>
@@ -401,6 +420,7 @@ const Onboarding = () => {
                                                         className="w-full input-text"
                                                         rows="10"
                                                         placeholder="Ex: Je suis pianiste depuis 10 ans et je propose des cours de piano pour tous niveaux. Je peux me déplacer à votre domicile ou vous recevoir chez moi. N'hésitez pas à me contacter pour plus d'informations."
+                                                        onChange={(e) => setDescAnnonce(e.target.value)}
                                                         />
                                                     <div className="flex gap-x-4">
                                                         <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
@@ -415,39 +435,78 @@ const Onboarding = () => {
                                         </div>
                                     )
                                     :null}
+                                {/*{onboardingTeacherPannel == 3 ? (*/}
+                                {/*    <div>*/}
+                                {/*        <h1>Plus que quelques détails...</h1>*/}
+                                {/*        <p>{titreAnnonce}</p>*/}
+                                {/*        <p>{descAnnonce}</p>*/}
+                                {/*    </div>*/}
+                                {/*    )*/}
+                                {/*    :null}*/}
                                 {onboardingTeacherPannel == 3 ? (
-                                        <h1>Distance</h1>
-                                    )
-                                    :null}
-                                {onboardingTeacherPannel == 4 ? (
                                         <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <h1 className="text-center">Encore quelques informations pour completer ton profil</h1>
-                                            <div className="flex flex-col items-center gap-[20px] my-[40px]">
-                                                <input
-                                                    type="email"
-                                                    placeholder="Email"
-                                                    ref={authRefs.registerEmailInput}
-                                                />
-                                                <input
-                                                    type="text"
-                                                    placeholder="Nom"
-                                                    ref={authRefs.registerNameInput}
-                                                />
-                                                <input
-                                                    type="date"
-                                                    placeholder="Date de naissance"
-                                                    ref={authRefs.registerAgeInput}
-                                                />
-                                                <input
-                                                    type="password"
-                                                    placeholder="Mot de passe"
-                                                    ref={authRefs.registerPasswordInput}
-                                                />
+                                            <div className="flex gap-x-[40px]">
+                                                <div className="w-1/3">
+                                                    <div className="w-full bg-sky rounded-[50px] p-10">
+                                                        <h3 className="mb-[30px]">Bon à savoir</h3>
+                                                        <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
+                                                    </div>
+                                                </div>
+                                                <div className=" ml-[40px] w-2/3">
+                                                    <h1>Encore quelques informations pour completer ton profil</h1>
+                                                    <div className="flex flex-wrap items-center gap-x-[40px] my-[40px] gap-y-[30px]">
+                                                        <div className="w-[45%]">
+                                                            <p className="text-primary">Prénom :</p>
+                                                            <input
+                                                                className="input"
+                                                                type="text"
+                                                                placeholder="Nom"
+                                                                ref={authRefs.registerNameInput}
+                                                            />
+                                                        </div>
+                                                        <div className="w-[45%]">
+                                                            <p className="text-primary">Date de naissance :</p>
+                                                            <input
+                                                                className="input"
+                                                                type="date"
+                                                                placeholder="Date de naissance"
+                                                                ref={authRefs.registerAgeInput}
+                                                            />
+                                                        </div>
+                                                        <div className="w-[45%]">
+                                                            <p className="text-primary">Email :</p>
+                                                            <input
+                                                                className="input"
+                                                                type="email"
+                                                                placeholder="Email"
+                                                                ref={authRefs.registerEmailInput}
+                                                            />
+                                                        </div>
+                                                        <div className="w-[45%]">
+                                                            <p className="text-primary">Mot de passe :</p>
+                                                            <input
+                                                                className="input"
+                                                                type="password"
+                                                                placeholder="Mot de passe"
+                                                                ref={authRefs.registerPasswordInput}
+                                                            />
+                                                        </div>
 
-                                                <button className="btn-plain my-[40px]" onClick={register}>
-                                                    Créer mon compte
-                                                </button>
-                                                <br /><p className="text-red-500">{authError}</p>
+                                                        <div className="flex gap-x-4">
+                                                            <button className="btn-plain-return bg-white" onClick={()=> {
+                                                                setUserCat([]);
+                                                                nextPannelTeacher(2)
+                                                            }}>
+                                                                Retour
+                                                            </button>
+                                                            <button className="btn-plain" onClick={register}>
+                                                                Créer mon compte
+                                                            </button>
+                                                        </div>
+
+                                                        <br /><p className="text-red">{authError}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     )
