@@ -15,6 +15,7 @@ import {CurrentUserContext} from "../../components/CurrentUser/CurrentUserContex
 import './Home.scss'
 
 import { Navbar, Announcement } from "../../components";
+import ChatSideBar from "../../components/Chat/ChatSideBar";
 
 const Home = () => {
     const userData  = useContext(CurrentUserContext);
@@ -43,22 +44,23 @@ const Home = () => {
         }
 
     };
-    
-  return (
-      <div className="p-10 home">
-        <Navbar />
-        <button onClick={logout}>Sign out</button>
+
+    return (
+        <div className="p-10 home">
+            <Navbar />
+            <button onClick={logout}>Sign out</button>
 
         { announcements ? announcements.map((announcement) => (
-            <div className="smallannouncements" key={announcement.id}>
-                <Announcement key={announcement.id} title={announcement.Titre} />
-            </div>
-        )) :
-            <p>There is no announcements...</p>
-        }
+                <div className="smallannouncements" key={announcement.id}>
+                    <Announcement key={announcement.id} title={announcement.Titre} />
+                </div>
+            )) :
+                <p>There is no announcements...</p>
+            }
+            <ChatSideBar userData={userData.userData} />
 
-      </div>
-  );
+        </div>
+    );
 };
 
 export default Home;

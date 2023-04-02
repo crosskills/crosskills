@@ -79,6 +79,7 @@ const Onboarding = () => {
                     image: "",
                     nom: "",
                     lookingFor: [],
+                    uid:user.uid
                 });
                 history("/");
             })
