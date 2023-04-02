@@ -115,6 +115,7 @@ const ChatSidebar = ({ userData }) => {
     <>
       <div className={`flex flex-row sidebar ${isOpen ? 'open' : ''}`}>
         <div style={{ border: 'solid 1px red', width: '30%' }}>
+          <h4>Contacts</h4>
           {displayContactList()}
 
           {/* pour test, a retirer par la suite */}

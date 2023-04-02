@@ -50,10 +50,13 @@ const ChatWindow = ({ activeChat, userId }) => {
                 activeChat ? (
                     <>
                         <div className="messages" style={{ width: '100%', border: 'solid 1px black' }}>
-                            {Object.keys(messages).map((messageID) => {
-                                const message = messages[messageID];
+                            {Object.keys(messages)
+                            .map((messageID) => messages[messageID])
+                            .sort((a, b) => a.timestamp - b.timestamp)
+                            .map((message) => {
+
                                 return (
-                                    <div key={messageID} className={`message ${message.sender === userId ? 'bg-gray' : 'bg-primary'}`}>
+                                    <div key={message.id} className={`message ${message.sender === userId ? 'bg-gray' : 'bg-primary'}`}>
                                         <p className={`message ${message.sender === userId ? 'text-primary' : 'text-gray'}`}>{message.text}</p>
                                         <div className="message-time text-black">{new Date(message.timestamp).toLocaleTimeString()}</div>
                                     </div>
