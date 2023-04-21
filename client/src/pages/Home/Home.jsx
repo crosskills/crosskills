@@ -95,9 +95,28 @@ const Home = () => {
 
 // POPUP… 🦅
 const AnnouncementPopup = (props) => {
+
+    const handleClose = (e) => {
+        if (e.target === e.currentTarget) {
+            props.onClose();
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            props.onClose();
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
   
     return (
-        <div class="announcement-popup">
+        <div class="announcement-popup" onClick={handleClose}>
 
             <div className="announcement-popup__content">
                 <div className="announcement-popup__header">
