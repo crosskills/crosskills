@@ -1,11 +1,9 @@
 import { useRef, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home.jsx";
-import Login from "./pages/Login/Login.jsx";
-import SignUp from "./pages/SignUp/SignUp.jsx";
 import { AuthProvider } from "./services/auth";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
-import Onboarding from "./pages/Onboarding/Onboarding";
+
+import { Onboarding, Login, Home } from "./pages";
 
 function App() {
   return(
