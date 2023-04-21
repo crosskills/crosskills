@@ -17,11 +17,16 @@ import './Home.scss'
 import { Navbar, Announcement } from "../../components";
 
 const Home = () => {
-    const userData  = useContext(CurrentUserContext);
-    console.log(userData);
+    const userData = useContext(CurrentUserContext);
+
+    const user = userData.userData
+        ? {
+            prenom: userData?.userData.prenom,
+            userType: userData?.userData.userType,
+        }
+        : null;
 
     const [announcements , setAnnouncements] = useState([]);
-
     useEffect(() => {
         getDocs(collection(database, "Annonces")).then((querySnapshot) => {
             const annonces = querySnapshot.docs.map((doc) => ({
@@ -46,9 +51,10 @@ const Home = () => {
     
   return (
       <div className="p-10 home">
-        <Navbar />
+        <Navbar
+            userType={user?.userType}
+        />
         <button onClick={logout}>Sign out</button>
-
         { announcements ? announcements.map((announcement) => (
             <div className="smallannouncements" key={announcement.id}>
                 <Announcement key={announcement.id} title={announcement.Titre} />
@@ -56,7 +62,6 @@ const Home = () => {
         )) :
             <p>There is no announcements...</p>
         }
-
       </div>
   );
 };
