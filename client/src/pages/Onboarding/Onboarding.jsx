@@ -214,12 +214,12 @@ const Onboarding = () => {
                                     <button className={onboardingStudentPannel == 2 ? 'btn-tab':onboardingStudentPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingStudentPannel > 2 ? ()=>nextPannelStudent(2): null}>2. Dernières informations</button>
                                 </div>
                                 {onboardingStudentPannel == 1 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-full md:w-2/3">
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-3/4">
 
 
-                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+                                            <div className="flex flex-col md:flex-row gap-0 md:gap-x-4">
                                                 <div className="order-last md:order-first w-full md:w-1/3">
-                                                    <div className="w-full bg-sky rounded-[50px] p-10">
+                                                    <div className="w-full bg-sky rounded-[50px] p-6">
                                                         <h3 className="mb-[30px]">Bon à savoir</h3>
                                                         <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                     </div>
@@ -259,22 +259,22 @@ const Onboarding = () => {
                                     )
                                     :null}
                                 {onboardingStudentPannel == 2 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-full md:w-2/3">
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-3/4">
 
 
                                             <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
 
                                                     <div className="order-last md:order-first w-full md:w-1/3">
-                                                        <div className="w-full bg-sky rounded-[50px] p-10">
+                                                        <div className="w-full bg-sky rounded-[50px] p-6">
                                                             <h3 className="mb-[30px]">Bon à savoir</h3>
                                                             <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                         </div>
                                                     </div>
                                                     <div className="m-0 md:ml-[40px] w-full md:w-2/3">
-                                                        <h1>Encore quelques informations pour completer ton profil</h1>
+                                                        <h1>Encore quelques informations pour compléter ton profil</h1>
                                                         <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-[40px] my-[40px] gap-y-[30px]">
                                                             <div className="w-full md:w-[45%]">
-                                                                <p className="text-primary">Prénom :</p>
+                                                                <p className="text-primary">Prénom</p>
                                                                 <input
                                                                     className="input"
                                                                     type="text"
@@ -283,7 +283,7 @@ const Onboarding = () => {
                                                                 />
                                                             </div>
                                                             <div className="w-full md:w-[45%]">
-                                                                <p className="text-primary">Date de naissance :</p>
+                                                                <p className="text-primary">Date de naissance</p>
                                                                 <input
                                                                     className="input"
                                                                     type="date"
@@ -292,7 +292,7 @@ const Onboarding = () => {
                                                                 />
                                                             </div>
                                                             <div className="w-full md:w-[45%]">
-                                                                <p className="text-primary">Email :</p>
+                                                                <p className="text-primary">Email</p>
                                                                 <input
                                                                     className="input"
                                                                     type="email"
@@ -301,7 +301,7 @@ const Onboarding = () => {
                                                                 />
                                                             </div>
                                                             <div className="w-full md:w-[45%]">
-                                                                <p className="text-primary">Mot de passe :</p>
+                                                                <p className="text-primary">Mot de passe</p>
                                                                 <input
                                                                     className="input"
                                                                     type="password"
@@ -335,26 +335,26 @@ const Onboarding = () => {
                     {
                         userType == 'teacher' ? (
                             <div className="flex flex-col items-center">
-                                <div className="flex gap-4 md:gap-[20px] mt-[20px]">
+                                <div className="flex flex-wrap gap-2 md:gap-[20px] mt-[20px]">
                                     <button className={onboardingTeacherPannel == 1 ? 'btn-tab':onboardingTeacherPannel < 1 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 1 ? ()=>nextPannelTeacher(1): null}>1. Centres d'intérêt</button>
                                     <button className={onboardingTeacherPannel == 2 ? 'btn-tab':onboardingTeacherPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 2 ? ()=>nextPannelTeacher(2): null}>2. Descriptif</button>
                                     <button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Compte</button>
                                 </div>
                                 {onboardingTeacherPannel == 1 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <div className="flex gap-x-[40px]">
-                                                <div className="w-1/3">
-                                                    <div className="w-full bg-sky rounded-[50px] p-10">
-                                                        <h3 className="text-4xl mb-4">Bon à savoir</h3>
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-3/4">
+                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+                                                <div className="order-last md:order-first w-full md:w-1/3">
+                                                    <div className="w-full bg-sky rounded-[50px] p-6">
+                                                        <h3 className="mb-[30px]">Bon à savoir</h3>
                                                         <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                     </div>
                                                 </div>
-                                                <div className="w-2/3 ml-[40px]">
-                                                    <h1 className="">Quel compétence souhaites-tu transmettre ?</h1>
+                                                <div className="m-0 md:ml-[40px] w-full md:w-2/3">
+                                                    <h1 className="">Quel compétences souhaites-tu transmettre ?</h1>
                                                     <input
-                                                        className="w-full relative z-[1]"
+                                                        className="input z-[1] my-4"
                                                         type="text"
-                                                        placeholder="Essaye piano"
+                                                        placeholder="-> Essaye piano"
                                                         value={searchText}
                                                         onChange={searchCat}/>
                                                     {searchIsOpen && searchText !== "" ? (
@@ -395,7 +395,7 @@ const Onboarding = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex gap-x-4">
+                                            <div className="flex py-4 md:py-10 gap-x-4">
                                                 <button className="btn-plain-return bg-white" onClick={()=> {
                                                     nextPannelTeacher(0)
                                                     setUserCat([]);
@@ -413,15 +413,15 @@ const Onboarding = () => {
                                     )
                                     :null}
                                 {onboardingTeacherPannel == 2 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <div className="flex gap-x-[40px]">
-                                                <div className="w-1/3">
-                                                    <div className="w-full bg-sky rounded-[50px] p-10">
-                                                        <h3 className="text-4xl mb-4">Bon à savoir</h3>
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-3/4">
+                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+                                                <div className="order-last md:order-first w-full md:w-1/3">
+                                                    <div className="w-full bg-sky rounded-[50px] p-6">
+                                                        <h3 className="mb-[30px]">Bon à savoir</h3>
                                                         <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                     </div>
                                                 </div>
-                                                <div className="w-2/3 ml-[40px]">
+                                                <div className="m-0 md:ml-[40px] w-full md:w-2/3">
                                                     <h1 className="">Vous avez choisi <span className="text-primary">{catTeacher}</span> !</h1>
                                                     <h4><span className="text-primary">Titre</span> de votre annonce</h4>
                                                     <p>(10 mots maximum)</p>
@@ -439,16 +439,16 @@ const Onboarding = () => {
                                                         placeholder="Ex: Je suis pianiste depuis 10 ans et je propose des cours de piano pour tous niveaux. Je peux me déplacer à votre domicile ou vous recevoir chez moi. N'hésitez pas à me contacter pour plus d'informations."
                                                         onChange={(e) => setDescAnnonce(e.target.value)}
                                                         />
-                                                    <div className="flex gap-x-4">
-                                                        <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
-                                                            RETOUR
-                                                        </button>
-                                                        <button className="btn-plain" onClick={()=>nextPannelTeacher(3)}>
-                                                            Suivant
-                                                        </button>
-                                                    </div>
                                                 </div>
                                             </div>
+                                                <div className="flex py-4 md:py-10 gap-x-4">
+                                                    <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
+                                                        RETOUR
+                                                    </button>
+                                                    <button className="btn-plain" onClick={()=>nextPannelTeacher(3)}>
+                                                        Suivant
+                                                    </button>
+                                                </div>
                                         </div>
                                     )
                                     :null}
@@ -461,19 +461,19 @@ const Onboarding = () => {
                                 {/*    )*/}
                                 {/*    :null}*/}
                                 {onboardingTeacherPannel == 3 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <div className="flex gap-x-[40px]">
-                                                <div className="w-1/3">
-                                                    <div className="w-full bg-sky rounded-[50px] p-10">
-                                                        <h3 className="mb-[30px]">Bon à savoir</h3>
-                                                        <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-3/4">
+                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+                                                <div className="order-last md:order-first w-full md:w-1/3">
+                                                    <div className="w-full bg-sky rounded-[50px] p-6">
+                                                            <h3 className="mb-[30px]">Bon à savoir</h3>
+                                                            <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                     </div>
                                                 </div>
-                                                <div className=" ml-[40px] w-2/3">
-                                                    <h1>Encore quelques informations pour completer ton profil</h1>
-                                                    <div className="flex flex-wrap items-center gap-x-[40px] my-[40px] gap-y-[30px]">
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Prénom :</p>
+                                                <div className="m-0 md:ml-[40px] w-full md:w-2/3">
+                                                    <h1>Encore quelques informations pour compléter ton profil</h1>
+                                                    <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-[40px] my-[40px] gap-y-[30px]">
+                                                        <div className="w-full md:w-[45%]">
+                                                            <p className="text-primary">Prénom</p>
                                                             <input
                                                                 className="input"
                                                                 type="text"
@@ -481,8 +481,8 @@ const Onboarding = () => {
                                                                 ref={authRefs.registerNameInput}
                                                             />
                                                         </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Date de naissance :</p>
+                                                        <div className="w-full md:w-[45%]">
+                                                            <p className="text-primary">Date de naissance</p>
                                                             <input
                                                                 className="input"
                                                                 type="date"
@@ -490,8 +490,8 @@ const Onboarding = () => {
                                                                 ref={authRefs.registerAgeInput}
                                                             />
                                                         </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Email :</p>
+                                                        <div className="w-full md:w-[45%]">
+                                                            <p className="text-primary">Email</p>
                                                             <input
                                                                 className="input"
                                                                 type="email"
@@ -499,8 +499,8 @@ const Onboarding = () => {
                                                                 ref={authRefs.registerEmailInput}
                                                             />
                                                         </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Mot de passe :</p>
+                                                        <div className="w-full md:w-[45%]">
+                                                            <p className="text-primary">Mot de passe</p>
                                                             <input
                                                                 className="input"
                                                                 type="password"
@@ -509,22 +509,23 @@ const Onboarding = () => {
                                                             />
                                                         </div>
 
-                                                        <div className="flex gap-x-4">
-                                                            <button className="btn-plain-return bg-white" onClick={()=> {
-                                                                setUserCat([]);
-                                                                nextPannelTeacher(2)
-                                                            }}>
-                                                                Retour
-                                                            </button>
-                                                            <button className="btn-plain" onClick={register}>
-                                                                Créer mon compte
-                                                            </button>
-                                                        </div>
-
-                                                        <br /><p className="text-red">{authError}</p>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
+
+                                            <div className="flex py-4 md:py-10 gap-x-4">
+                                                <button className="btn-plain-return bg-white" onClick={()=> {
+                                                    setUserCat([]);
+                                                    nextPannelTeacher(2)
+                                                }}>
+                                                    Retour
+                                                </button>
+                                                <button className="btn-plain" onClick={register}>
+                                                    Terminer
+                                                </button>
+                                            </div>
+                                            <p className="text-red">{authError}</p>
                                         </div>
                                     )
                                     :null}
