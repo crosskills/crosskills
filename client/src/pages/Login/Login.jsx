@@ -37,12 +37,13 @@ function Login() {
         }
     };
     return (
-        <div className="flex w-full h-full p-[60px] gap-[40px] onboarding">
-            <div className="flex flex-col justify-between items-center rounded-[50px] w-2/3 p-[40px] shadow-[0_0px_15px_0px_rgba(0,0,0,0.05)]">
-                <img src={logo} alt="" className="max-w-[300px]"/>
+        <div className="flex flex-col md:flex-row w-full h-full py-10 px-2 md:p-[60px] md:gap-[40px] onboarding">
+
+            <div className="flex flex-col justify-between items-center w-full md:w-2/3 p-0 md:p-[40px] rounded-none md:rounded-[50px] shadow-none md:shadow-[0_0px_15px_0px_rgba(0,0,0,0.05)]">
+                <img src={logo} alt="" className="w-5/6 max-w-[300px] my-5 md:my-10"/>
 
                 <div className="flex flex-col items-center">
-                    <h1 className="text-3xl font-bold">Trouve ton partenaire d'apprentissage idéal</h1>
+                    <h1 className="text-xl text-center md:text-3xl font-bold">Trouve ton partenaire d'apprentissage idéal</h1>
 
                     <form className="flex flex-col items-center mt-10 gap-3">
                         <input
@@ -64,12 +65,13 @@ function Login() {
                     <p className="text-red mt-5 text-sm">{authError && <RiAlertFill className="inline-block" />} {authError}</p>
                 </div>
 
-                <Link to="/onboarding">Pas de compte ? Crée ton propre profil !</Link>
+                <Link to="/onboarding" className="my-5 md:m-0 text-center">Pas de compte ? Crée ton propre profil !</Link>
             </div>
 
-            <div className="onboarding-image w-1/3">
-                <img src={handshake} alt="" className="object-cover h-full w-full rounded-tl-[150px] rounded-tr-[50px] rounded-br-[150px] rounded-bl-[50px] shadow-[0_0px_15px_0px_rgba(0,0,0,0.05)]"/>
+            <div className="onboarding-image w-full md:w-1/3 h-40 md:h-full">
+                <img src={handshake} alt="" className="object-cover h-full w-full rounded-tl-lg rounded-tr-md rounded-br-lg rounded-bl-md md:rounded-tl-[150px] md:rounded-tr-[50px] md:rounded-br-[150px] md:rounded-bl-[50px] shadow-[0_0px_15px_0px_rgba(0,0,0,0.05)]"/>
             </div>
+
         </div>
     );
 }

@@ -176,28 +176,30 @@ const Onboarding = () => {
     }
 
     return (
-        <div className="flex flex-col items-center w-full h-full onboarding py-[60px] px-2 md:p-[60px]">
-            <img src={logo} alt="" className="max-w-[300px]"/>
+        <div className="flex flex-col items-center onboarding py-10 px-2 md:p-[60px]">
+
+
+            <img src={logo} alt="" className="w-5/6 max-w-[300px] my-5 md:my-10"/>
             {selectedCategories ? (
                 <div>
-                    <div className="flex flex-col md:flex-row items-center my-[40px] md:gap-[40px] px-2 md:p-0 gap-5">
-                        <button className="w-full md:max-w-[500px] rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('student')}>
+                    <div className="flex flex-col md:flex-row items-center my-5 md:my-10 md:gap-12">
+                        <button className="w-5/6  md:w-full md:max-w-[450px] rounded-[25px] md:rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('student')}>
                             <img className="" src={onBoardingStudent} alt=""/>
                             <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
-                                <p className="p-role text-[4vw] md:text-2xl">Je souhaite apprendre des connaissances</p>
+                                <p className="p-role text-xl md:text-2xl">Je souhaite apprendre des connaissances</p>
                             </div>
                         </button>
-                        <button className="w-full md:max-w-[500px] rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('teacher')}>
+                        <button className="w-5/6  md:w-full md:max-w-[450px] rounded-[25px] md:rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('teacher')}>
                             <img className="" src={onBoardingTeacher} alt=""/>
                             <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
-                                <p className="p-role text-[4vw] md:text-2xl">Je souhaite partager mes connaissances</p>
+                                <p className="p-role text-xl md:text-2xl">Je souhaite partager mes connaissances</p>
                             </div>
                         </button>
 
                     </div>
 
-                    <div className="flex justify-center px-20 md:p-0">
-                        <a href="/" className="w-full md:w-max text-center btn-plain">
+                    <div className="flex justify-center">
+                        <a href="/" className="md:w-max-lg md:w-max-lg text-center btn-plain-return">
                             RETOUR À L'ACCUEIL
                         </a>
                     </div>
@@ -207,34 +209,38 @@ const Onboarding = () => {
                     {
                         userType == 'student' ? (
                             <div className="flex flex-col items-center">
-                                <div className="flex gap-[20px] mt-[20px]">
+                                <div className="flex gap-4 md:gap-[20px] mt-[20px]">
                                     <button className={onboardingStudentPannel == 1 ? 'btn-tab':onboardingStudentPannel < 1 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingStudentPannel > 1 ? ()=>nextPannelStudent(1): null}>1. Centres d'intérêt</button>
                                     <button className={onboardingStudentPannel == 2 ? 'btn-tab':onboardingStudentPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingStudentPannel > 2 ? ()=>nextPannelStudent(2): null}>2. Dernières informations</button>
                                 </div>
                                 {onboardingStudentPannel == 1 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <div className="flex gap-x-[40px]">
-                                                <div className="w-1/3">
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-2/3">
+
+
+                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+                                                <div className="order-last md:order-first w-full md:w-1/3">
                                                     <div className="w-full bg-sky rounded-[50px] p-10">
                                                         <h3 className="mb-[30px]">Bon à savoir</h3>
                                                         <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
                                                     </div>
                                                 </div>
-                                                <div className=" ml-[40px] w-2/3">
-                                                    <h1 >Dans quel domaine souhaites tu apprendre de nouvelles connaissances ?</h1>
+                                                <div className="m-0 md:ml-[40px] w-full md:w-2/3">
+                                                    <h1>Dans quel domaine souhaites tu apprendre de nouvelles connaissances ?</h1>
                                                     <h4 className="mt-10 mb-6">LES TOP CATÉGORIES...</h4>
-                                                            {categories.map(category => (
-                                                                <Dropdown
-                                                                    key={category.id}
-                                                                    label={category.Nom}
-                                                                    options={category["sous-cat"]}
-                                                                    onChange={selectCat}
-                                                                        >
-                                                                </Dropdown>
-                                                            ))}
+                                                        {categories.map(category => (
+                                                            <Dropdown
+                                                                key={category.id}
+                                                                label={category.Nom}
+                                                                options={category["sous-cat"]}
+                                                                onChange={selectCat}
+                                                                    >
+                                                            </Dropdown>
+                                                        ))}
                                                 </div>
                                             </div>
-                                            <div className="flex gap-x-4">
+
+
+                                            <div className="flex py-4 md:py-10 gap-x-4">
                                                 <button className="btn-plain-return bg-white" onClick={()=>{
                                                     nextPannelStudent(0)
                                                     setUserCat([]);
@@ -253,83 +259,83 @@ const Onboarding = () => {
                                     )
                                     :null}
                                 {onboardingStudentPannel == 2 ? (
-                                        <div className="my-[40px] flex flex-col items-center w-2/3">
-                                            <div className="flex gap-x-[40px]">
-                                                <div className="w-1/3">
-                                                    <div className="w-full bg-sky rounded-[50px] p-10">
-                                                        <h3 className="mb-[30px]">Bon à savoir</h3>
-                                                        <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
+                                        <div className="my-[40px] flex flex-col items-center w-full md:w-2/3">
+
+
+                                            <div className="flex flex-col md:flex-row gap-x-10 md:gap-x-[40px]">
+
+                                                    <div className="order-last md:order-first w-full md:w-1/3">
+                                                        <div className="w-full bg-sky rounded-[50px] p-10">
+                                                            <h3 className="mb-[30px]">Bon à savoir</h3>
+                                                            <p>CROSSKILLS te propose d’enseigner et de partager tes connaissances dans plus de 50 disciplines. Utilise le moteur de recherche ou bien sélectionne directement ta matière principale dans le menu et laisse-toi guider pour que l’aventure commence</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="m-0 md:ml-[40px] w-full md:w-2/3">
+                                                        <h1>Encore quelques informations pour completer ton profil</h1>
+                                                        <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-[40px] my-[40px] gap-y-[30px]">
+                                                            <div className="w-full md:w-[45%]">
+                                                                <p className="text-primary">Prénom :</p>
+                                                                <input
+                                                                    className="input"
+                                                                    type="text"
+                                                                    placeholder="Nom"
+                                                                    ref={authRefs.registerNameInput}
+                                                                />
+                                                            </div>
+                                                            <div className="w-full md:w-[45%]">
+                                                                <p className="text-primary">Date de naissance :</p>
+                                                                <input
+                                                                    className="input"
+                                                                    type="date"
+                                                                    placeholder="Date de naissance"
+                                                                    ref={authRefs.registerAgeInput}
+                                                                />
+                                                            </div>
+                                                            <div className="w-full md:w-[45%]">
+                                                                <p className="text-primary">Email :</p>
+                                                                <input
+                                                                    className="input"
+                                                                    type="email"
+                                                                    placeholder="Email"
+                                                                    ref={authRefs.registerEmailInput}
+                                                                />
+                                                            </div>
+                                                            <div className="w-full md:w-[45%]">
+                                                                <p className="text-primary">Mot de passe :</p>
+                                                                <input
+                                                                    className="input"
+                                                                    type="password"
+                                                                    placeholder="Mot de passe"
+                                                                    ref={authRefs.registerPasswordInput}
+                                                                />
+                                                            </div>
                                                     </div>
                                                 </div>
-                                                <div className=" ml-[40px] w-2/3">
-                                                    <h1>Encore quelques informations pour completer ton profil</h1>
-                                                    <div className="flex flex-wrap items-center gap-x-[40px] my-[40px] gap-y-[30px]">
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Prénom :</p>
-                                                            <input
-                                                                className="input"
-                                                                type="text"
-                                                                placeholder="Nom"
-                                                                ref={authRefs.registerNameInput}
-                                                            />
-                                                        </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Date de naissance :</p>
-                                                            <input
-                                                                className="input"
-                                                                type="date"
-                                                                placeholder="Date de naissance"
-                                                                ref={authRefs.registerAgeInput}
-                                                            />
-                                                        </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Email :</p>
-                                                            <input
-                                                                className="input"
-                                                                type="email"
-                                                                placeholder="Email"
-                                                                ref={authRefs.registerEmailInput}
-                                                            />
-                                                        </div>
-                                                        <div className="w-[45%]">
-                                                            <p className="text-primary">Mot de passe :</p>
-                                                            <input
-                                                                className="input"
-                                                                type="password"
-                                                                placeholder="Mot de passe"
-                                                                ref={authRefs.registerPasswordInput}
-                                                            />
-                                                        </div>
-
-
-
-
-                                                        <div className="flex gap-x-4">
-                                                            <button className="btn-plain-return bg-white" onClick={()=> {
-                                                                setUserCat([]);
-                                                                nextPannelStudent(1)
-                                                            }}>
-                                                                Retour
-                                                            </button>
-                                                            <button className="btn-plain" onClick={register}>
-                                                                Créer mon compte
-                                                            </button>
-                                                        </div>
-
-                                                        <br /><p className="text-red">{authError}</p>
-                                                    </div>
-                                                </div>
+    
                                             </div>
+                                                <div className="flex py-4 md:py-10 gap-x-4">
+                                                    <button className="btn-plain-return bg-white" onClick={()=> {
+                                                        setUserCat([]);
+                                                        nextPannelStudent(1)
+                                                    }}>
+                                                        Retour
+                                                    </button>
+                                                    <button className="btn-plain" onClick={register}>
+                                                        Terminer
+                                                    </button>
+                                                </div>
+                                                <p className="text-red">{authError}</p>
                                         </div>
                                     )
                                     :null}
                             </div>
+                            
                         ): null
                     }
                     {
                         userType == 'teacher' ? (
                             <div className="flex flex-col items-center">
-                                <div className="flex gap-[20px] mt-[20px]">
+                                <div className="flex gap-4 md:gap-[20px] mt-[20px]">
                                     <button className={onboardingTeacherPannel == 1 ? 'btn-tab':onboardingTeacherPannel < 1 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 1 ? ()=>nextPannelTeacher(1): null}>1. Centres d'intérêt</button>
                                     <button className={onboardingTeacherPannel == 2 ? 'btn-tab':onboardingTeacherPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 2 ? ()=>nextPannelTeacher(2): null}>2. Descriptif</button>
                                     <button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Compte</button>
@@ -528,8 +534,6 @@ const Onboarding = () => {
                 </div>
             )
             }
-
-
 
         </div>
     );

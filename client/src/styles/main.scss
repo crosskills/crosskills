@@ -20,8 +20,9 @@ body{
 }
 
 h1{
-  font-size: 2.5rem;
-  font-weight: 700;
+  // mobile first (lucas)
+  font-size: 1.5rem;
+  font-weight: 500;
   font-family: Montserrat;
   color: black;
 }
@@ -81,5 +82,13 @@ h4{
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Ajustements police (lucas) en mobile-first
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
   }
 }

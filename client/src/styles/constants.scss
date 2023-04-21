@@ -1,10 +1,10 @@
-.btn-plain{
+.btn-plain {
   background-color: $blue;
-  border-radius: 50px;
+  border-radius: 25px;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 20px 40px;
+  padding: 10px 30px;
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   border:2px solid $blue;
@@ -13,56 +13,39 @@
       background-color: white;
       border: 2px solid $blue;
   }
-  // @media screen and (max-width: 768px) {
-  //   padding: 10px 20px;
-  //   font-size: 0.8rem;
-  // }
+  
 }
-.btn-plain-return{
+.btn-plain-return {
   background-color: white;
-  border-radius: 50px;
+  border-radius: 25px;
   color: $blue;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 20px 40px;
+  padding: 10px 30px;
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   border:2px solid $blue;
 }
 
-.btn-tab{
+.btn-tab {
   background-color: $blue;
   border-radius: 50px;
   color: white;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  padding: 10px 20px;
+  padding: 8px 15px;
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   border:2px solid $blue;
 
 }
-
-.btn-tab{
-  background-color: $blue;
-  border-radius: 50px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 400;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  transition: color 0.3s ease-in-out;
-  border:2px solid $blue;
-
-}
-
 .btn-tab_empty{
   background-color: white;
   border-radius: 50px;
   color: $blue;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  padding: 10px 20px;
+  padding: 8px 15px;
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   border:2px solid $blue;
@@ -71,14 +54,13 @@
     color: white;
   }
 }
-
 .btn-empty-hidden{
   background-color: white;
   border-radius: 50px;
   color: grey;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  padding: 10px 20px;
+  padding: 8px 15px;
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   border:2px solid grey;
@@ -90,16 +72,16 @@
   color: white;
 }
 
-.input-white{
+.input-white {
   background-color: white;
   border: none !important;
-  border-radius: 50px;
+  border-radius: 25px;
   color: $blue;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 1rem 6rem 1rem 2rem;
+  padding: 1rem 2rem;
   width: 100%;
-  box-shadow: rgba($blue, 0.25) 0px 13px 27px -5px, rgba($blue, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba($blue, 0.25) 0px 10px 10px -5px, rgba($blue, 0.3) 0px 10px 10px -8px;
   transition: color 0.3s ease-in-out;
   &:focus{
     outline: none;
@@ -109,3 +91,96 @@
     color: rgba($blue, 0.8);
   }
 }
+
+// MOBILE FIRST
+
+@media screen and (min-width: 768px) {
+
+  .input-white {
+    background-color: white;
+    border: none !important;
+    border-radius: 50px;
+    color: $blue;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: rgba($blue, 0.25) 0px 13px 27px -5px, rgba($blue, 0.3) 0px 8px 16px -8px;
+    transition: color 0.3s ease-in-out;
+    &:focus{
+      outline: none;
+    }
+    &::placeholder {
+      font-size: 1rem;
+      color: rgba($blue, 0.8);
+    }
+  }
+
+  .btn-plain{
+    background-color: $blue;
+    border-radius: 50px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 20px 40px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+    border:2px solid $blue;
+    &:hover{
+        color: $blue;
+        background-color: white;
+        border: 2px solid $blue;
+    }
+    
+  }
+  .btn-plain-return{
+    background-color: white;
+    border-radius: 50px;
+    color: $blue;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 20px 40px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+    border:2px solid $blue;
+  }
+  
+  .btn-tab {
+    background-color: $blue;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+    border:2px solid $blue;
+  
+  }
+  .btn-tab_empty{
+    background-color: white;
+    border-radius: 50px;
+    color: $blue;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+    border:2px solid $blue;
+    &:hover{
+      background-color: $blue;
+      color: white;
+    }
+  }
+  .btn-empty-hidden{
+    background-color: white;
+    border-radius: 50px;
+    color: grey;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+    border:2px solid grey;
+  
+  }
+}
+
