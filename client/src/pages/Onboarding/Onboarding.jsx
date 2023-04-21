@@ -176,22 +176,31 @@ const Onboarding = () => {
     }
 
     return (
-        <div className="flex flex-col items-center w-full h-full onboarding p-[60px]">
+        <div className="flex flex-col items-center w-full h-full onboarding py-[60px] px-2 md:p-[60px]">
             <img src={logo} alt="" className="max-w-[300px]"/>
             {selectedCategories ? (
-                <div className="flex my-[40px] gap-[40px]">
-                    <button className="max-w-[500px] w-full rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('student')}>
-                        <img className="" src={onBoardingStudent} alt=""/>
-                        <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
-                            <p className="p-role">Je souhaite apprendre des connaissances</p>
-                        </div>
-                    </button>
-                    <button className="max-w-[500px] w-full rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('teacher')}>
-                        <img className="" src={onBoardingTeacher} alt=""/>
-                        <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
-                            <p className="p-role">Je souhaite partager mes connaissances</p>
-                        </div>
-                    </button>
+                <div>
+                    <div className="flex flex-col md:flex-row items-center my-[40px] md:gap-[40px] px-2 md:p-0 gap-5">
+                        <button className="w-full md:max-w-[500px] rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('student')}>
+                            <img className="" src={onBoardingStudent} alt=""/>
+                            <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
+                                <p className="p-role text-[4vw] md:text-2xl">Je souhaite apprendre des connaissances</p>
+                            </div>
+                        </button>
+                        <button className="w-full md:max-w-[500px] rounded-[50px] relative filter grayscale duration-300 border-4 border-white overflow-hidden hover:grayscale-0 hover:border-primary" onClick={()=> selectUserType('teacher')}>
+                            <img className="" src={onBoardingTeacher} alt=""/>
+                            <div className="absolute bottom-0 w-full p-[20px] bg-black bg-opacity-30 rounded-bl-[50px] rounded-br-[50px]">
+                                <p className="p-role text-[4vw] md:text-2xl">Je souhaite partager mes connaissances</p>
+                            </div>
+                        </button>
+
+                    </div>
+
+                    <div className="flex justify-center px-20 md:p-0">
+                        <a href="/" className="w-full md:w-max text-center btn-plain">
+                            RETOUR À L'ACCUEIL
+                        </a>
+                    </div>
                 </div>
             ) : (
                 <div>
@@ -323,7 +332,6 @@ const Onboarding = () => {
                                 <div className="flex gap-[20px] mt-[20px]">
                                     <button className={onboardingTeacherPannel == 1 ? 'btn-tab':onboardingTeacherPannel < 1 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 1 ? ()=>nextPannelTeacher(1): null}>1. Centres d'intérêt</button>
                                     <button className={onboardingTeacherPannel == 2 ? 'btn-tab':onboardingTeacherPannel < 2 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 2 ? ()=>nextPannelTeacher(2): null}>2. Descriptif</button>
-                                    {/*<button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Descriptif</button>*/}
                                     <button className={onboardingTeacherPannel == 3 ? 'btn-tab':onboardingTeacherPannel < 3 ? 'btn-empty-hidden': 'btn-tab_empty'} onClick={onboardingTeacherPannel > 3 ? ()=>nextPannelTeacher(3): null}>3. Compte</button>
                                 </div>
                                 {onboardingTeacherPannel == 1 ? (
