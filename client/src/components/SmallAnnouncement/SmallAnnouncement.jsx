@@ -1,28 +1,28 @@
 import React from 'react'
-import './SmallAnnouncement.scss'
+import './Announcement.scss'
 
 import { ImLocation2 } from 'react-icons/im';
 
-const Announcement = ( { title } ) => {
+const SmallAnnouncement = ( { titre, image, lieu, prof, onClick } ) => {
   return (
-    <div className='smallannouncement'>
+    <div className='smallannouncement' onClick={onClick}>
       
       <div className="smallannouncement_image">
-        <img src="https://blog-media.byjusfutureschool.com/bfs-blog/2022/08/03035002/Article-Image-945%C3%97498.jpg" alt="" />
+        <img src={image} alt="" />
       </div>
       
       <div className="smallannouncement_content">
-        <h4>{title}</h4>
+        <h4>{titre}</h4>
 
         <div className="smallannouncement_content-infos">
           <div className="smallannouncement_content-infos-profile">
-            <img src="https://i.ibb.co/YZpLJ2y/Adil-Baltazare-Minimized.png" alt="" />
-            <p>avec Adil</p>
+            <img src={prof.Image} alt={prof.Nom} />
+            <p>avec {prof.Nom}</p>
           </div>
 
           <div className="smallannouncement_content-infos-address">
             <ImLocation2/>
-            <p>La Courneuve</p>
+            <p>{lieu}</p>
           </div>
         </div>
       </div>
@@ -35,4 +35,4 @@ const Announcement = ( { title } ) => {
   )
 }
 
-export default Announcement
+export default SmallAnnouncement
