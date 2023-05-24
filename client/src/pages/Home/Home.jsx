@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { signOut } from "firebase/auth";
+import React, { useState, useEffect, useContext } from "react";
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
+} from "firebase/auth";
 import { auth, database } from "../../services/firebase";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import {AuthContext} from "../../services/auth";
+import {CurrentUserContext} from "../../services/auth";
 
 
 import './Home.scss'
@@ -13,36 +19,10 @@ import { ImLocation2 } from 'react-icons/im';
 import { Navbar, SmallAnnouncement } from "../../components";
 
 const Home = () => {
-    const navigate = useNavigate();
 
+    const userData = useContext(CurrentUserContext);
+    const user = {prenom: "",userType: ""}
     const [announcements , setAnnouncements] = useState([]);
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupData, setPopupData] = useState({});
-
-    const handleLogout = async () => {
-
-        try {
-            await signOut(auth);
-            navigate("/login");
-        } catch (error) {
-            console.error(error.message);
-        }
-
-    };
-
-    const handlePopupOpen = (data) => {
-        const popupContainer = document.createElement("div");
-        document.body.appendChild(popupContainer);
-        
-        setShowPopup(true);
-        setPopupData(data);
-    }
-
-    const handlePopupClose = () => {
-        setShowPopup(false);
-        setPopupData({});   
-    }
-
     useEffect(() => {
         getDocs(collection(database, "Annonces")).then((querySnapshot) => {
             const annonces = querySnapshot.docs.map((doc) => ({
@@ -51,14 +31,12 @@ const Home = () => {
             }));
             setAnnouncements(annonces);
         });
-
     }, []); 
 
     return (
         <div className="p-10 home">
             <Navbar />
             <button onClick={handleLogout}>Sign out</button>
-
             <div className="smallannouncements" >
                 { announcements ? announcements.map((announcement) => ( 
                     <SmallAnnouncement 
@@ -75,7 +53,6 @@ const Home = () => {
                     <p>There is no announcements...</p>
                 }
             </div>
-
 
             {/* SHOW POPUP… 🦅 */}
             { showPopup && (
