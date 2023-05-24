@@ -9,7 +9,7 @@ import { auth, database } from "../../services/firebase";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../../services/auth";
-import {CurrentUserContext} from "../../components/CurrentUser/CurrentUserContext";
+import {CurrentUserContext} from "../../services/auth";
 
 
 import './Home.scss'
@@ -18,14 +18,7 @@ import { Navbar, Announcement } from "../../components";
 
 const Home = () => {
     const userData = useContext(CurrentUserContext);
-
-    const user = userData.userData
-        ? {
-            prenom: userData?.userData.prenom,
-            userType: userData?.userData.userType,
-        }
-        : null;
-
+    const user = {prenom: "",userType: ""}
     const [announcements , setAnnouncements] = useState([]);
     useEffect(() => {
         getDocs(collection(database, "Annonces")).then((querySnapshot) => {
@@ -35,7 +28,8 @@ const Home = () => {
             }));
             setAnnouncements(annonces);
         });
-    }, []);
+    }, [userData]);
+
     const navigate = useNavigate();
 
     const logout = async () => {
@@ -52,7 +46,7 @@ const Home = () => {
   return (
       <div className="p-10 home">
         <Navbar
-            userType={user?.userType}
+            user={userData}
         />
         <button onClick={logout}>Sign out</button>
         { announcements ? announcements.map((announcement) => (

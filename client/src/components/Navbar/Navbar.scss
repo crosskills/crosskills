@@ -3,4 +3,14 @@
     width: 30px;
     height: 30px;
   }
+  .dropdown-list--serach-home{
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    left: 0;
+    padding: 40px 20px 20px 20px;
+    border: 2px solid #2D69D1;
+    z-index: -1;
+    border-radius: 0 0 20px 20px;
+  }
 }

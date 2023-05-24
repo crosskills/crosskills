@@ -11,9 +11,11 @@ export const CurrentUserProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
+        console.log(currentUser)
         if (currentUser) {
             getDoc(doc(database, "Users", currentUser.uid)).then((doc) => {
                 setUserData(doc.data());
+                console.log('1')
             })
         } else {
             setUserData(null);
