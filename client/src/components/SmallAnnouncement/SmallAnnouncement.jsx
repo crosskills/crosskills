@@ -15,7 +15,6 @@ const SmallAnnouncement = ( { titre, image, lieu, prof, onClick } ) => {
 
       <div className="smallannouncement_content">
         <h4>{titre}</h4>
-
         <div className="smallannouncement_content-infos">
           <div className="smallannouncement_content-infos-profile">
             <img src={prof.Image} alt={prof.Nom} />
