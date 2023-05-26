@@ -18,7 +18,14 @@ import {HiCamera} from "react-icons/hi";
 import {MdClose, MdPhotoCamera} from "react-icons/md";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 
+import Select from "react-select";
 
+// Assume you have a list of cities in France
+const citiesInFrance = [
+    { label: "Paris", value: "Paris" },
+    { label: "Lyon", value: "Lyon" },
+    // ...more cities
+  ];
 
 const AddAnnonce = () => {
     const userData = useContext(CurrentUserContext);
@@ -141,6 +148,8 @@ const AddAnnonce = () => {
         setOnboardingTeacherPannel(onboardingTeacherPannel+1)
     }
 
+    const [selectedCity, setSelectedCity] = useState(null);
+
     return (
         <div className="flex flex-col items-center w-full h-full onboarding p-[60px]">
             <img src={logo} alt="" className="max-w-[300px]"/>
@@ -245,6 +254,15 @@ const AddAnnonce = () => {
                                                 placeholder="Ex: Je suis pianiste depuis 10 ans et je propose des cours de piano pour tous niveaux. Je peux me déplacer à votre domicile ou vous recevoir chez moi. N'hésitez pas à me contacter pour plus d'informations."
                                                 onChange={(e) => setDescAnnonce(e.target.value)}
                                             />
+
+                                            <Select
+                                                value={selectedCity}
+                                                onChange={setSelectedCity}
+                                                options={citiesInFrance}
+                                                isSearchable
+                                                placeholder="Select a city..."
+                                            />
+
                                             <div className="flex gap-x-4">
                                                 <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
                                                     RETOUR

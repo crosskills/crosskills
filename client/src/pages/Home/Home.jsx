@@ -172,8 +172,8 @@ const AnnouncementPopup = (props) => {
                     <div className="announcement-popup__header-info">
                         <h2>{props.titre}</h2>
                         <div className="flex mt-[10px]">
-                            <img src={props.prof.Image} alt={props.prof.Prenom} className="profilPic"/>
-                            <p className="ml-[10px]">Avec {props.prof.Prenom}</p>
+                            <img src={props.prof.Image} alt={props.prof.Nom} className="profilPic"/>
+                            <p className="ml-[10px]">Avec {props.prof.Nom}</p>
                         </div>
                         <div className="flex mt-[10px]">
                             <ImLocation2/>

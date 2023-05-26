@@ -14,7 +14,31 @@ import {AuthContext} from "../../services/auth";
 import "../../styles/main.scss";
 import Dropdown from "../../components/Dropdown/dropdown";
 
+import Select from "react-select";
 
+// Assume you have a list of cities in France
+const citiesInFrance = [
+    { value: 'paris', label: 'Paris' },
+    { value: 'marseille', label: 'Marseille' },
+    { value: 'lyon', label: 'Lyon' },
+    { value: 'toulouse', label: 'Toulouse' },
+    { value: 'nice', label: 'Nice' },
+    { value: 'nantes', label: 'Nantes' },
+    { value: 'strasbourg', label: 'Strasbourg' },
+    { value: 'montpellier', label: 'Montpellier' },
+    { value: 'bordeaux', label: 'Bordeaux' },
+    { value: 'lille', label: 'Lille' },
+    { value: 'rennes', label: 'Rennes' },
+    { value: 'reims', label: 'Reims' },
+    { value: 'le havre', label: 'Le Havre' },
+    { value: 'saint-etienne', label: 'Saint-Étienne' },
+    { value: 'toulon', label: 'Toulon' },
+    { value: 'angers', label: 'Angers' },
+    { value: 'grenoble', label: 'Grenoble' },
+    { value: 'dijon', label: 'Dijon' },
+    { value: 'nimes', label: 'Nîmes' },
+    { value: 'aix-en-provence', label: 'Aix-en-Provence' }
+];
 
 const Onboarding = () => {
     const [onboardingStudentPannel, setOnboardingStudentPannel] = useState(0);
@@ -39,6 +63,7 @@ const Onboarding = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState("");
 
+    const [selectedCity, setSelectedCity] = useState(null);
 
     const register = async () => {
         let annonce = [];
@@ -48,6 +73,7 @@ const Onboarding = () => {
             addDoc(collection(database, "Annonces"), {
                 Titre: titreAnnonce,
                 Description: descAnnonce,
+                Lieu: selectedCity,
             }).then((docRef) => {
                 annonce.push(docRef.id);
             })
@@ -428,6 +454,15 @@ const Onboarding = () => {
                                                         placeholder="Ex: Je suis pianiste depuis 10 ans et je propose des cours de piano pour tous niveaux. Je peux me déplacer à votre domicile ou vous recevoir chez moi. N'hésitez pas à me contacter pour plus d'informations."
                                                         onChange={(e) => setDescAnnonce(e.target.value)}
                                                         />
+
+                                                    <Select
+                                                        value={selectedCity}
+                                                        onChange={setSelectedCity}
+                                                        options={citiesInFrance}
+                                                        isSearchable
+                                                        placeholder="Select a city..."
+                                                    />
+
                                                     <div className="flex gap-x-4">
                                                         <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
                                                             RETOUR
