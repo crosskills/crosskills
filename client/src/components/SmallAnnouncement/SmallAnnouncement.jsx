@@ -11,21 +11,23 @@ const SmallAnnouncement = ( { titre, image, lieu, prof, onClick } ) => {
         <img src={image} alt="" />
       </div>
       
+      <div className="smallannouncement_overlay"></div>
+
       <div className="smallannouncement_content">
         <h4>{titre}</h4>
         <div className="smallannouncement_content-infos">
-          <div className="smallannouncement_content-infos-profile flex justify-between">
-              <div className="w-full flex items-center">
-                  <img src={prof.Image} alt={prof.Nom} />
-                  <p className="ml-[10px]">Avec {prof.Nom}</p>
-              </div>
-              <div className="smallannouncement_content-infos-address">
-                  <ImLocation2/>
-                  <p>{lieu}</p>
-              </div>
+          <div className="smallannouncement_content-infos-profile">
+            <img src={prof.Image} alt={prof.Nom} />
+            <p className='text-small'>avec {prof.Nom}</p>
+          </div>
+
+          <div className="smallannouncement_content-infos-address">
+            <ImLocation2/>
+            <p>{lieu}</p>
           </div>
         </div>
       </div>
+
 
       <div className="smallannouncement_callToAction">
         {/* <button>Participer</button> */}

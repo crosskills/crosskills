@@ -56,13 +56,14 @@ const Home = () => {
                     console.log(doc.id, " => ", doc.data());
                     ann.push(doc.data());
                 });
+                console.log(ann)
                 setAnnonces(ann);
             }
 
             getTeacherAnnouncements()
             console.log(annonces)
         }
-    }, []); 
+    }, []);
 
     return (
         <div className="p-10 home flex flex-col items-center">
@@ -70,7 +71,7 @@ const Home = () => {
             {/*<button onClick={handleLogout}>Sign out</button>*/}
             <div className="smallannouncements body" >
                 {
-                    userData.userType === "student"
+                    userData.userData.userType === "student"
                         ?  announcements
                             ? announcements.map((announcement) => (
                                 <SmallAnnouncement
@@ -105,21 +106,21 @@ const Home = () => {
                                 <div>
                                     <h3>Cours Actifs</h3>
                                     <div className="active-cours mt-[20px]">
-                                    {
-                                        annonces && annonces.length >= 1 ? annonces.map((annonce) => (
-                                            <div className="active-cour flex items-center mb-[20px]">
-                                                <img src={annonce.Image} alt=""/>
-                                                <div className="flex flex-col ml-[20px]">
-                                                    <p className="cour-title">{annonce.Titre}</p>
-                                                    <p>{annonce.Lieu}</p>
+                                        {
+                                            annonces && annonces.length >= 1 ? annonces.map((annonce) => (
+                                                <div className="active-cour flex items-center mb-[20px]">
+                                                    <img src={annonce.Image} alt=""/>
+                                                    <div className="flex flex-col ml-[20px]">
+                                                        <p className="cour-title">{annonce.Titre}</p>
+                                                        <p>{annonce.Lieu}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )): <p>There is no announcements...</p>
-                                    }
+                                            )): <p>There is no announcements...</p>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            </div>
+                        </div>
 
                 }
 
@@ -162,29 +163,29 @@ const AnnouncementPopup = (props) => {
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
-  
+
     return (
         <div class="announcement-popup" onClick={handleClose}>
             <div className="announcement-popup__content">
                 <div className="announcement-popup__header">
                     <img src={props.image} alt={props.titre} className="announcement-popup__body-thumbnail" />
-                        <div className="announcement-popup__header-info">
-                            <h2>{props.titre}</h2>
-                            <div className="flex mt-[10px]">
-                                <img src={props.prof.Image} alt={props.prof.Prenom} className="profilPic"/>
-                                <p className="ml-[10px]">Avec {props.prof.Prenom}</p>
-                            </div>
-                            <div className="flex mt-[10px]">
-                                <ImLocation2/>
-                                <p>{props.lieu}</p>
-                            </div>
+                    <div className="announcement-popup__header-info">
+                        <h2>{props.titre}</h2>
+                        <div className="flex mt-[10px]">
+                            <img src={props.prof.Image} alt={props.prof.Prenom} className="profilPic"/>
+                            <p className="ml-[10px]">Avec {props.prof.Prenom}</p>
                         </div>
+                        <div className="flex mt-[10px]">
+                            <ImLocation2/>
+                            <p>{props.lieu}</p>
+                        </div>
+                    </div>
                     <MdClose onClick={() => props.onClose()} className="announcement-popup__header-close" />
                 </div>
                 <div className="announcement-popup__body">
                     <p>{props.description}</p>
                 </div>
-            </div>    
+            </div>
 
         </div>
     );
