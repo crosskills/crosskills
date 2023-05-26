@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { realtimeDatabase, database, } from "../../services/firebase";
 import { ref, orderByChild, query, equalTo, onValue, update, push } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
-
+ 
 import ChatWindow from './ChatWindow';
+import Contactitem from './Contactitem';
 
 const ChatSidebar = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeChat, setActiveChat] = useState()
   const [chats, setChats] = useState([])
+  const [contacts, setContacts] = useState([])
   const [conversations, setConversations] = useState([])
 
   useEffect(() => {
@@ -60,17 +62,24 @@ const ChatSidebar = ({ userData }) => {
   const displayContactList = () => {
     return chats.map((chat) => (
       <div
-        className={`smallannouncement`}
-        style={{ width: '100%' }}
+        style={{ width: '90%' }}
         onClick={() => {
           setActiveChat(chat)
         }}
+        key={chat.conversationID}
       >
-        <div className="smallannouncement_content-infos-profile" >
-          {/* <img src={chat.userInfo.photo} alt={contact.name} />*/}
-          <div className="name">{chat.userInfo.prenom}</div>
-          <div className="name">{chat.userInfo.userType}</div>
+        <div className="contacts-item rounded-full" style={{ width: '90%' }} >
+        <div className="flex flex-row" >
+        <img src={chat.userInfo.photo} />
+              <div className='pl-2'>
+                 <p className="text-sm ">{chat.userInfo.prenom}</p>
+              <p className="message text-secondary">{chat.userInfo.userType} </p>
           <div className="last-message">{chat.lastMessage.text}</div>
+                </div>
+            </div>
+          
+           
+          
         </div>
       </div>
     ))
@@ -114,33 +123,32 @@ const ChatSidebar = ({ userData }) => {
   return (
     <>
       <div className={`flex flex-row sidebar ${isOpen ? 'open' : ''}`}>
-        <div style={{ border: 'solid 1px red', width: '30%' }}>
-          <h4>Contacts</h4>
-          {displayContactList()}
-
-          {/* pour test, a retirer par la suite */}
-          <div
-            className={`smallannouncement`}
-            style={{ width: '100%' }}
-            onClick={() => {
-              createConversation(userData.uid, "ZJ9c0jh0mRZ2jnaSOP8OYhfQv1k1")
-            }}
-          >
-            <div className="smallannouncement_content-infos-profile" >
-              <div className="name text-primary">Commencer la discussion avec Abde2</div>
-            </div>
-          </div>
-          {/* pour test, a retirer par la suite */}
-        </div>
-        {userData ?
+        
+         
+        {activeChat ?
           (
-            <ChatWindow activeChat={activeChat} userId={userData.uid} />
+            <ChatWindow activeChat={activeChat} userId={userData.uid}setActiveChat={setActiveChat}/>
 
-          ) : null
+          ) : 
+          <div style={{ border: 'solid 1px red', width: '50%' }}>
+          <div  className='flex flex-row space-x-10'>
+          <h3 className='ml-12'>Vos messages</h3>
+          <button onClick={() => {handleToggleSidebar()} }>
+          <svg fill="none" viewBox="0 0 24 24" height="2em" width="2em" >
+      <path
+        fill="currentColor"
+        d="M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z"
+      />
+    </svg>
+          </button>
+          </div>
+          {displayContactList()}
+        {/* <Contactitem userData={userData} createConversation={createConversation} setActiveChat={setActiveChat}/> */}
+        </div>
         }
       </div >
       <button className={`sidebar-toggle ${isOpen ? 'open' : ''}`} onClick={handleToggleSidebar}>
-        Toggle Sidebar
+      <svg class="h-8 w-8 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4" />  <line x1="12" y1="11" x2="12" y2="11.01" />  <line x1="8" y1="11" x2="8" y2="11.01" />  <line x1="16" y1="11" x2="16" y2="11.01" /></svg>
       </button>
     </>
   );

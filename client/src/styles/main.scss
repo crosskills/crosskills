@@ -85,12 +85,11 @@ h4{
 }
 
 .sidebar {
-  width: 45vw;
+  width: 50vw;
   height: 100%;
-  background-color: lightgray;
   position: fixed;
   top: 0;
-  right: -50vw;
+  right: -75vw;
   overflow-x: hidden;
   padding-top: 20px;
   transform: translateX(-100%);
@@ -106,7 +105,18 @@ h4{
   position: fixed;
   bottom: 20px;
   right: 0px;
-  background-color: #ccc;
   padding: 10px;
   transition: right 0.3s ease-in-out;
+}
+
+.contacts-item{
+  background-color: rgba(45, 105, 209, 0.17);
+  margin-left: 10px;
+  padding: 10px;
+  flex-direction: row;
+}
+.contacts-item img{
+  width: 80x;
+  height: 80px;
+  border-radius: 50%;
 }
