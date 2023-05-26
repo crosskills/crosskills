@@ -20,6 +20,7 @@ import {
 
 const Profile = () => {
     const userData  = useContext(CurrentUserContext);
+    console.log(userData.userData)
     const docUser = doc(database, 'Users', userData.userData.uid);
     const [file, setFile] = useState("");
     const [percent, setPercent] = useState(0);
