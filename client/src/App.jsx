@@ -7,9 +7,12 @@ import Profile from "./pages/Profile/Profile.jsx";
 import {Home} from "./pages";
 import Login from "./pages/Login/Login.jsx";
 import AddAnnonce from "./pages/AddAnnonce/AddAnnonce";
+import {signOut} from "firebase/auth";
+import {auth} from "./services/firebase";
 
 
 function App() {
+
   return(
       <AuthProvider>
           <Router>

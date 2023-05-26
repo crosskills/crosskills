@@ -12,11 +12,12 @@ export const CurrentUserContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [userData, setUserData] = useState(null);
-    const [pending, setPending] = useState(true);
+    const [pending, setPending] = useState(false);
+
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
-            // console.log(user)
+            console.log(user)
             if (user) {
                 getDoc(doc(database, "Users", user.uid)).then((doc) => {
                     setCurrentUser(user)
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }) => {
                     setPending(false)
                 })
             } else {
-                setPending(true)
+                setPending(false)
                 setUserData(null);
             }
         });
