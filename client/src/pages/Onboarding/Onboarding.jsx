@@ -61,14 +61,7 @@ const Onboarding = () => {
                     displayName: authRefs.registerNameInput.current.value,
                 });
                 setAuthError("")
-                console.log(userCredential)
-                const user = userCredential.user;
-                if(userType === "teacher"){
-                    updateDoc(doc(database, "Annonces", annonce[0]), {
-                        Prof:user.uid,
-                    })
-                }
-                setDoc(doc(database, "Users", user.uid), {
+                addDoc(doc(database, "Users", user.uid), {
                     email: user.email,
                     userType: userType,
                     categories: userCat,
@@ -78,7 +71,14 @@ const Onboarding = () => {
                     bio: "",
                     image: "",
                     nom: "",
+                    participateTo: [],
                     lookingFor: [],
+                }).then((docRef) => {
+                    if(userType === "teacher"){
+                        updateDoc(doc(database, "Annonces", annonce[0]), {
+                            Prof:docRef.id,
+                        })
+                    }
                 });
                 history("/");
             })
