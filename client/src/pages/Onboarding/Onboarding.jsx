@@ -61,7 +61,9 @@ const Onboarding = () => {
                     displayName: authRefs.registerNameInput.current.value,
                 });
                 setAuthError("")
-                addDoc(doc(database, "Users", user.uid), {
+                const user = userCredential.user;
+                console.log(user.uid);
+                setDoc(doc(database, "Users", user.uid), {
                     email: user.email,
                     userType: userType,
                     categories: userCat,

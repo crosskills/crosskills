@@ -2,23 +2,27 @@ import { useEffect, useContext, useState } from 'react';
 import { CurrentUserContext } from '../../services/auth';
 import {MdPhotoCamera} from 'react-icons/md'
 import { storage } from '../../services/firebase';
-
+import {
+    signOut,
+} from "firebase/auth";
 
 import './Profile.scss'
 
 import { Navbar } from '../../components'
 import profileImage from '../../assets/images/profile_sample.jpg'
-import {database} from "../../services/firebase";
+import {auth, database} from "../../services/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import {
     ref,
     uploadBytesResumable,
     getDownloadURL
 } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Profile = () => {
+    const navigate = useNavigate();
     const userData  = useContext(CurrentUserContext);
     console.log(userData.userData)
     const docUser = doc(database, 'Users', userData.userData.uid);
@@ -105,6 +109,15 @@ const Profile = () => {
         handleUpload(e.target.files[0])
     }
 
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            navigate("/login");
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
 
     return (
       <div className="py-10 px-2 md:px-10 profile text-black flex flex-col justify-center">
@@ -159,6 +172,7 @@ const Profile = () => {
                         ? <button className="btn-plain-small" onClick={()=>updateProfile()}>Enregister</button>
                         : <button className="btn-plain-small" onClick={()=>setIsEditing(true)}>Modifier le profil</button>
                             }
+                  <button className="btn-plain-small" onClick={()=>handleLogout()}>Log Out</button>
                 </div>
             </section>
 
