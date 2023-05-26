@@ -71,6 +71,7 @@ const Onboarding = () => {
                     bio: "",
                     image: "",
                     nom: "",
+                    uid: user.uid,
                     participateTo: [],
                     lookingFor: [],
                 }).then((docRef) => {
