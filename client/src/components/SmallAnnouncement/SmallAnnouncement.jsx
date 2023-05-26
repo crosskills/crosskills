@@ -11,13 +11,15 @@ const SmallAnnouncement = ( { titre, image, lieu, prof, onClick } ) => {
         <img src={image} alt="" />
       </div>
       
+      <div className="smallannouncement_overlay"></div>
+
       <div className="smallannouncement_content">
         <h4>{titre}</h4>
 
         <div className="smallannouncement_content-infos">
           <div className="smallannouncement_content-infos-profile">
             <img src={prof.Image} alt={prof.Nom} />
-            <p>avec {prof.Nom}</p>
+            <p className='text-small'>avec {prof.Nom}</p>
           </div>
 
           <div className="smallannouncement_content-infos-address">
@@ -26,6 +28,7 @@ const SmallAnnouncement = ( { titre, image, lieu, prof, onClick } ) => {
           </div>
         </div>
       </div>
+
 
       <div className="smallannouncement_callToAction">
         {/* <button>Participer</button> */}

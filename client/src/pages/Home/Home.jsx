@@ -120,23 +120,60 @@ const AnnouncementPopup = (props) => {
 
             <div className="announcement-popup__content">
                 <div className="announcement-popup__header">
-                    <h2>{props.titre}</h2>
-                    <MdClose onClick={() => props.onClose()} className="announcement-popup__header-close" /> 
-                </div>
 
-                <div className="announcement-popup__body">
-                    <img src={props.image} alt={props.titre} className="announcement-popup__body-thumbnail" />
-
-                    <p>{props.description}</p>
+                    <img src={props.image} alt={props.titre} className="announcement-popup__header-thumbnail" />
 
                     <div className="">
-                        <img src={props.prof.Image} alt={props.prof.Nom} />
-                        <p>avec {props.prof.Nom}</p>
+
+                        <h2>{props.titre}</h2>
+
+                        <div className="announcement-popup__header-author">
+                            <div className="flex gap-3 items-center">
+                                <img src={props.prof.Image} alt={props.prof.Nom} />
+                                <p>avec {props.prof.Nom}</p>
+                            </div>
+
+                            <div className="flex gap-1 items-center mt-3">
+                                <ImLocation2 className="text-lg"/>
+                                <p>{props.lieu}</p>
+                            </div>    
+                        </div>
+
                     </div>
 
-                    <div>
-                        <ImLocation2/>
-                        <p>{props.lieu}</p>
+                    <MdClose onClick={() => props.onClose()} className="announcement-popup__header-close" />
+                </div>
+
+                <div className="announcement-popup__body mt-6 flex gap-12">
+
+                    <div className="w-3/5 flex flex-col gap-8">
+                        <div className="announcement-popup__body-apropos">
+                            <h3 className="text-black capitalize">A propos du cours</h3>
+
+                            <p className="text-base font-normal">{props.description}</p>
+                        </div>
+
+                        <div className="announcement-popup__body-apropos-author">
+                            <h4>A propos de {props.prof.Nom}</h4>
+
+                            <p className="text-base font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque sit incidunt, dolore consectetur tenetur ad ipsam. Laborum, veniam natus. Vitae!</p>
+                        </div>
+
+                        <div className="announcement-popup__body-avis">
+                            <h4>Avis</h4>
+                            <br /><br /><br />
+                        </div>
+                    </div>
+
+                    <div className="flex-col text-black">
+
+                        <div>
+                            Tous niveaux
+                        </div>
+
+                        <div>
+                            Français
+                        </div>
                     </div>
 
                 </div>
