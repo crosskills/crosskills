@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { realtimeDatabase, database, } from "../../services/firebase";
 import { ref, orderByChild, query, equalTo, onValue, update, push } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
- 
+
 import ChatWindow from './ChatWindow';
 import Contactitem from './Contactitem';
 
@@ -12,6 +12,10 @@ const ChatSidebar = ({ userData }) => {
   const [chats, setChats] = useState([])
   const [contacts, setContacts] = useState([])
   const [conversations, setConversations] = useState([])
+
+  // a enlever ensuite
+  const [newMessage, setNewMessage] = useState("")
+  const [participant2, setParticipant2] = useState("")
 
   useEffect(() => {
     if (userData) {
@@ -61,44 +65,26 @@ const ChatSidebar = ({ userData }) => {
 
   const displayContactList = () => {
     return chats.map((chat) => (
-      <div
-        style={{ width: '90%' }}
-        onClick={() => {
-          setActiveChat(chat)
-        }}
-        key={chat.conversationID}
-      >
-        <div className="contacts-item rounded-full" style={{ width: '90%' }} >
-        <div className="flex flex-row" >
-        <img src={chat.userInfo.photo} />
-              <div className='pl-2'>
-                 <p className="text-sm ">{chat.userInfo.prenom}</p>
-              <p className="message text-secondary">{chat.userInfo.userType} </p>
-          <div className="last-message">{chat.lastMessage.text}</div>
-                </div>
-            </div>
-          
-           
-          
-        </div>
-      </div>
+      <Contactitem userData={userData} createConversation={createConversation} setActiveChat={setActiveChat} chat={chat} />
     ))
 
   }
-
 
   const handleToggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
 
-  //fonction test, a retirer par la suite
-  function createConversation(participant1, participant2) {
+  function createConversation(participant1, participant2, textToSend) {
+    //  if (verifyIfExist(participant1, participant2)) {
+    //     return;
+    //  }
+    //  else {
     const newConversationKey = push(ref(realtimeDatabase, 'conversations')).key;
 
     const message = {
-      sender: participant2,
-      text: 'Salut!',
+      sender: participant1,
+      text: textToSend,
       timestamp: Date.now()
     }
     const conversationData = {
@@ -117,38 +103,60 @@ const ChatSidebar = ({ userData }) => {
     updates[`/conversations/${newConversationKey}`] = conversationData;
 
     return update(ref(realtimeDatabase), updates);
+    //}
   }
-  //fonction test, a retirer par la suite
+
+  // const verifyIfExist = (participant1, participant2) => {
+  //    //veryfieng if the conversation already exists
+  //    const conversationRef = ref(realtimeDatabase, 'conversations/');
+  //    const conversationQuery = query(conversationRef, orderByChild(`participants/${participant1}`), equalTo(true));
+  //    onValue(conversationQuery, (snapshot) => {
+  //      const data = snapshot.val()
+  //      const conversation = Object.entries(data).map(([conversationID, conversation]) => {
+  //        return {
+  //          ...conversation,
+  //          conversationID: conversationID
+  //        }
+  //      })
+  //      console.log('conversation', conversation)
+  //    })
+  //   }
+  //veryfieng if the conversation already exists
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createConversation(userData.uid, participant2, newMessage)
+  }
 
   return (
     <>
       <div className={`flex flex-row sidebar ${isOpen ? 'open' : ''}`}>
-        
-         
+
+
         {activeChat ?
           (
-            <ChatWindow activeChat={activeChat} userId={userData.uid}setActiveChat={setActiveChat}/>
+            <ChatWindow activeChat={activeChat} userId={userData.uid} setActiveChat={setActiveChat} />
 
-          ) : 
+          ) :
           <div style={{ border: 'solid 1px red', width: '50%' }}>
-          <div  className='flex flex-row space-x-10'>
-          <h3 className='ml-12'>Vos messages</h3>
-          <button onClick={() => {handleToggleSidebar()} }>
-          <svg fill="none" viewBox="0 0 24 24" height="2em" width="2em" >
-      <path
-        fill="currentColor"
-        d="M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z"
-      />
-    </svg>
-          </button>
+            <form className="send-message" onSubmit={handleSubmit} >
+              <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Ecrire un message" />
+              <input type="text" value={participant2} onChange={(e) => setParticipant2(e.target.value)} placeholder="uid du destinataire" />
+              <button type="submit">Envoyer</button>
+            </form>
+
+
+            <div >
+              <h3 className='mx-8' disp>Vos messages</h3>
+            </div>
+            {displayContactList()}
           </div>
-          {displayContactList()}
-        {/* <Contactitem userData={userData} createConversation={createConversation} setActiveChat={setActiveChat}/> */}
-        </div>
         }
       </div >
-      <button className={`sidebar-toggle ${isOpen ? 'open' : ''}`} onClick={handleToggleSidebar}>
-      <svg class="h-8 w-8 text-black"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4" />  <line x1="12" y1="11" x2="12" y2="11.01" />  <line x1="8" y1="11" x2="8" y2="11.01" />  <line x1="16" y1="11" x2="16" y2="11.01" /></svg>
+
+      <button className={` sidebar-toggle ${isOpen ? 'open bg-primary '  : 'bg-sky '}`} onClick={handleToggleSidebar}>
+
+        <svg class={`h-8 w-8 ${isOpen ? 'text-white' : 'text-black'} `} width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4" />  <line x1="12" y1="11" x2="12" y2="11.01" />  <line x1="8" y1="11" x2="8" y2="11.01" />  <line x1="16" y1="11" x2="16" y2="11.01" /></svg>
       </button>
     </>
   );
