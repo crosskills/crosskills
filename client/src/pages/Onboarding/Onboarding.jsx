@@ -74,6 +74,7 @@ const Onboarding = () => {
                 Titre: titreAnnonce,
                 Description: descAnnonce,
                 Lieu: selectedCity,
+                Image:"",
             }).then((docRef) => {
                 annonce.push(docRef.id);
             })
@@ -105,7 +106,11 @@ const Onboarding = () => {
                 }).then((docRef) => {
                     if(userType === "teacher"){
                         updateDoc(doc(database, "Annonces", annonce[0]), {
-                            Prof:docRef.id,
+                            Prof: {
+                                Id: docRef.id,
+                                Image: "",
+                                Nom: authRefs.registerNameInput.current.value,
+                            },
                         })
                     }
                 });

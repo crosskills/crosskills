@@ -21,6 +21,7 @@ import { Navbar, SmallAnnouncement } from "../../components";
 
 const Home = () => {
     const userData = useContext(CurrentUserContext);
+    console.log(userData.userData)
     const navigate = useNavigate();
     const [announcements , setAnnouncements] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
@@ -76,7 +77,6 @@ const Home = () => {
                             ? announcements.map((announcement) => (
                                 <SmallAnnouncement
                                     key={announcement.id}
-
                                     titre={announcement.Titre}
                                     image={announcement.Image}
                                     lieu={announcement.Lieu}
@@ -85,7 +85,7 @@ const Home = () => {
                                     onClick={() => handlePopupOpen(announcement)}
                                 />
                             ))
-                            : <p>There is no announcements...</p>
+                            : <p>Vous n'avez pas de cours pour l'instant...</p>
                         : <div className="body teacher">
                             <div className="teacher-info">
                                 <h1>Vos Cours</h1>
@@ -97,9 +97,8 @@ const Home = () => {
                                         <p className="font-bold mb-[10px]">Les cours les plus recherché ces derniers temps :</p>
                                         <div className="flex flex-wrap famous-class">
                                             <p>Tennis</p>
-                                            <p>Tennis</p>
-                                            <p>Tennis</p>
-                                            <p>Tennis</p>
+                                            <p>Programmation web</p>
+                                            <p>Guitare</p>
                                         </div>
                                     </div>
                                 </div>
@@ -164,8 +163,10 @@ const AnnouncementPopup = (props) => {
         };
     }, []);
 
+    const src = `mailto:${props.prof.email}subject=Je voudrais participer à votre cours`
+
     return (
-        <div class="announcement-popup" onClick={handleClose}>
+        <div className="announcement-popup" onClick={handleClose}>
             <div className="announcement-popup__content">
                 <div className="announcement-popup__header">
                     <img src={props.image} alt={props.titre} className="announcement-popup__body-thumbnail" />
@@ -182,8 +183,11 @@ const AnnouncementPopup = (props) => {
                     </div>
                     <MdClose onClick={() => props.onClose()} className="announcement-popup__header-close" />
                 </div>
-                <div className="announcement-popup__body">
+                <div className="announcement-popup__body mb-[40px]">
                     <p>{props.description}</p>
+                </div>
+                <div className="mt-[20px]">
+                    <a href="mailto:simon.jo@hotmail.com" className="btn-plain" >Contacter le prof</a>
                 </div>
             </div>
 

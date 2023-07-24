@@ -12,6 +12,14 @@ import {auth} from "./services/firebase";
 
 
 function App() {
+    // async function logout() {
+    //     await signOut(auth).then(() => {
+    //         console.log("logged out")
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     });
+    // }
+
 
   return(
       <AuthProvider>

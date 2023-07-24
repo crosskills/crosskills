@@ -40,6 +40,7 @@ const AddAnnonce = () => {
     const [descAnnonce, setDescAnnonce] = useState("");
     const [categories, setCategories] = useState([]);
     const [categoriesList, setCategoriesList] = useState([]);
+
     const history = useNavigate();
 
     console.log(userData)
@@ -81,7 +82,7 @@ const AddAnnonce = () => {
             Titre: titreAnnonce,
             Description: descAnnonce,
             Image:image,
-            Lieu: "",
+            Lieu: selectedCity,
             Prof: {
                 Id: userData.userData.uid,
                 Image: userData.userData.image,
