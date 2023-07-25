@@ -12,7 +12,6 @@ import {auth} from "./services/firebase";
 
 
 function App() {
-
   return(
       <AuthProvider>
           <Router>
