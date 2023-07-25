@@ -1,0 +1,49 @@
+.import-image {
+  max-height: 250px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #D1D1D1;
+  border-radius: 20px;
+  position: relative;
+  svg{
+    font-size: 3rem;
+    color: #919191;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.check-annonce{
+  h2{
+    font-size: 2rem;
+    color: #006DE0;
+    font-weight: 600;
+  }
+  .empty{
+    background: #919191;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    p{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  h3{
+    color: black;
+  }
+}
+
+.input-blanc{
+  padding: 10px 15px;
+  border-radius: 50px;
+  border: 1px solid #006DE0;
+}

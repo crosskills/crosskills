@@ -19,9 +19,7 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     }
     return (
     currentUser ? (
-                    <CurrentUserProvider>
-                        <Outlet />
-                    </CurrentUserProvider>
+                    <Outlet />
                 ) : (
                     <div className="flex flex-col-reverse w-full h-full justify-center  onboarding p-[20px] gap-[40px] relative md:flex-row md:p-[60px] md:justify-start">
                         <img src={logo} alt="" className="max-w-[150px] md:max-w-[300px] absolute top-[20px] "/>
