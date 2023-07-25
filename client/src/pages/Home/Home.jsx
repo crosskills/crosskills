@@ -15,9 +15,12 @@ import {HiOutlinePlusSm} from "react-icons/hi";
 
 import './Home.scss'
 
+
+import ChatSideBar from "../../components/Chat/ChatSideBar";
 import { MdClose } from 'react-icons/md';
 import { ImLocation2 } from 'react-icons/im';
 import { Navbar, SmallAnnouncement } from "../../components";
+
 
 const Home = () => {
     const userData = useContext(CurrentUserContext);
@@ -122,10 +125,25 @@ const Home = () => {
                             </div>
                         </div>
 
+    };
+
+    return (
+        <div className="p-10 home">
+            <Navbar />
+            <button onClick={logout}>Sign out</button>
+
+        { announcements ? announcements.map((announcement) => (
+                <div className="smallannouncements" key={announcement.id}>
+                    <Announcement key={announcement.id} title={announcement.Titre} />
+                </div>
+            )) :
+                <p>There is no announcements...</p>
+            }
+            <ChatSideBar userData={userData.userData} />
+
                 }
 
             </div>
-
             {/* SHOW POPUP… 🦅 */}
             { showPopup && (
                 <AnnouncementPopup

@@ -82,6 +82,7 @@ const Onboarding = () => {
                             Prof:docRef.id,
                         })
                     }
+
                 });
                 history("/");
             })
