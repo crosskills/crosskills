@@ -126,41 +126,23 @@ const Home = () => {
                         </div>
 
     };
-
-    return (
-        <div className="p-10 home">
-            <Navbar />
-            <button onClick={logout}>Sign out</button>
-
-        { announcements ? announcements.map((announcement) => (
-                <div className="smallannouncements" key={announcement.id}>
-                    <Announcement key={announcement.id} title={announcement.Titre} />
-                </div>
-            )) :
-                <p>There is no announcements...</p>
-            }
-            <ChatSideBar userData={userData.userData} />
-
-                }
-
-            </div>
-            {/* SHOW POPUP… 🦅 */}
-            { showPopup && (
-                <AnnouncementPopup
-                    titre={popupData.Titre}
-                    description={popupData.Description}
-                    image={popupData.Image}
-                    lieu={popupData.Lieu}
-                    prof={popupData.Prof}
-                    onClose={handlePopupClose}
-                />
-            )}
-
-        </div>
-    );
+                <ChatSideBar userData={userData.userData} />
+                { showPopup && (
+                    <AnnouncementPopup
+                        titre={popupData.Titre}
+                        description={popupData.Description}
+                        image={popupData.Image}
+                        lieu={popupData.Lieu}
+                        prof={popupData.Prof}
+                        onClose={handlePopupClose}
+                    />
+                )}
+</div>
+</div>
+                );
 };
 
-// POPUP… 🦅
+
 const AnnouncementPopup = (props) => {
 
     const handleClose = (e) => {
