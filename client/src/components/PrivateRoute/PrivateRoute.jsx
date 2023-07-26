@@ -1,22 +1,15 @@
-import React, { createContext ,useContext } from "react";
-import {Route, Navigate, Outlet, useNavigate} from "react-router-dom";
+import React, { createContext, useContext, useRef } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../services/auth";
 import logo from "../../assets/images/logoBLeu.png";
-import handshake from "../../assets/images/handshake.png";
 import herofull from "../../assets/images/hero-full.png";
-import {CurrentUserProvider} from "../CurrentUser/CurrentUserContext";
-
-const CurrentUserContext = createContext(null);
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     const {currentUser} = useContext(AuthContext);
     const history = useNavigate();
-    const onboarding = () => {
-        history("/onboarding");
-    }
-    const login = () => {
-        history("/login");
-    }
+    const onboarding = () => history("/onboarding"); 
+    const login = () => history("/login"); 
+    
     return (
     currentUser ? (
                     <Outlet />
