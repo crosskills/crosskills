@@ -1,0 +1,46 @@
+.home .smallannouncements {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.teacher-info .famous-class p {
+  width: 50%;
+  margin-bottom: 10px;
+}
+.teacher-info .active-cours {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.teacher-info .active-cours .active-cour {
+  width: 33%;
+}
+.teacher-info .active-cours .active-cour img {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.teacher-info .active-cours .active-cour .cour-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.btn-teacher {
+  border-radius: 20px;
+  text-transform: initial;
+  width: 100%;
+  font-size: 1.5rem;
+  max-width: 400px;
+  font-weight: 500;
+}
+.btn-teacher .icon-plus {
+  font-weight: 900;
+  font-size: 1.5rem;
+}/*# sourceMappingURL=Home.css.map */

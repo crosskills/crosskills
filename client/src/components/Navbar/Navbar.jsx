@@ -56,15 +56,16 @@ const Navbar = ({user}) => {
             {
                 user.userData.userType === "student" ?
                     <div className="w-[400px]">
-                    <div className="relative flex justify-between rounded-[50px] bg-gray py-[5px] px-[5px]  w-full">
+                    <div className="relative flex justify-between rounded-[50px] bg-gray py-[5px] px-[5px]  w-full z-20">
+                        <div className="bg-gray w-full h-full absolute rounded-[50px] top-0 left-0 z-10"></div>
                         <input type="text"
                                placeholder="Que souhaite tu apprendres ?"
-                               className="focus:outline-none bg-gray w-[70%] py-[10px] px-[15px] rounded-[50px]"
+                               className="focus:outline-none bg-gray w-[70%] py-[10px] px-[15px] rounded-[50px] z-20"
                                value={searchText}
                                onChange={searchCat}
                         />
                         {searchIsOpen && searchText !== "" ? (
-                        <ul className="dropdown-list--serach-home z-0">
+                        <ul className="dropdown-list--serach-home z-0 bg-gray">
                             {displayedItems.map((item, index) => (
                                 <li
                                     key={index}
@@ -76,7 +77,7 @@ const Navbar = ({user}) => {
                             ))}
                         </ul>
                         ) : null}
-                        <div className="p-[10px] rounded-[50px] bg-primary">
+                        <div className="p-[10px] rounded-[50px] bg-primary z-20">
                             <RxMagnifyingGlass className="rounded-[50px] text-white"/>
                         </div>
                     </div>

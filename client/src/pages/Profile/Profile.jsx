@@ -158,7 +158,8 @@ const Profile = () => {
                                     <p>{userData.userData.location}</p>
                                 </div>
                         ):(   <div className='main-infos text-center md:text-left py-5'>
-                                <h1 className='text-3xl'>{user.prenom}</h1>
+                                <h1 className='text-3xl'>{user.prenom} {user.nom}</h1>
+                                <h1 className='text-3xl'></h1>
                                 <p>{user.age} ans</p>
                                 <p>{userData.userData.location}</p>
                             </div>
@@ -166,11 +167,11 @@ const Profile = () => {
                     }
 
 
-                    <h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Informations </h2>
-                    <h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Passions </h2>
+                    {/*<h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Informations </h2>*/}
+                    {/*<h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Passions </h2>*/}
                     {isEditing
-                        ? <button className="btn-plain-small" onClick={()=>updateProfile()}>Enregister</button>
-                        : <button className="btn-plain-small" onClick={()=>setIsEditing(true)}>Modifier le profil</button>
+                        ? <button className="btn-plain-small mb-[20px]" onClick={()=>updateProfile()}>Enregister</button>
+                        : <button className="btn-plain-small mb-[20px]" onClick={()=>setIsEditing(true)}>Modifier le profil</button>
                             }
                   <button className="btn-plain-small" onClick={()=>handleLogout()}>Log Out</button>
                 </div>
@@ -179,9 +180,9 @@ const Profile = () => {
             <section className='profile-datas-edito col-span-3'>
                 <div className='welcome'>
                     <h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Bonjour ! Je m'appelle {user.prenom} ! </h2>
-                    <p>bio</p>
-                    <h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Marie propose : </h2>
-                    <h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Avis </h2>
+                    <p>{user.bio}</p>
+                    {/*<h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Marie propose : </h2>*/}
+                    {/*<h2 className='text-2xl md:text-3xl font-bold my-2 md:my-5'> Avis </h2>*/}
                 </div>
             </section>
 

@@ -25,6 +25,7 @@ import { createConversation } from "../../components/Chat/ChatFunctions";
 
 const Home = () => {
     const userData = useContext(CurrentUserContext);
+    console.log(userData.userData)
     const navigate = useNavigate();
     const [announcements , setAnnouncements] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
@@ -88,7 +89,7 @@ const Home = () => {
                                     onClick={() => handlePopupOpen(announcement)}
                                 />
                             ))
-                            : <p>There is no announcements...</p>
+                            : <p>Vous n'avez pas de cours pour l'instant...</p>
                         : <div className="body teacher">
                             <div className="teacher-info">
                                 <h1>Vos Cours</h1>
@@ -100,9 +101,8 @@ const Home = () => {
                                         <p className="font-bold mb-[10px]">Les cours les plus recherché ces derniers temps :</p>
                                         <div className="flex flex-wrap famous-class">
                                             <p>Tennis</p>
-                                            <p>Tennis</p>
-                                            <p>Tennis</p>
-                                            <p>Tennis</p>
+                                            <p>Programmation web</p>
+                                            <p>Guitare</p>
                                         </div>
                                     </div>
                                 </div>
@@ -173,16 +173,18 @@ const AnnouncementPopup = (props) => {
         };
     }, []);
 
+    const src = `mailto:${props.prof.email}subject=Je voudrais participer à votre cours`
+
     return (
-        <div class="announcement-popup" onClick={handleClose}>
+        <div className="announcement-popup" onClick={handleClose}>
             <div className="announcement-popup__content">
                 <div className="announcement-popup__header">
                     <img src={props.image} alt={props.titre} className="announcement-popup__body-thumbnail" />
                     <div className="announcement-popup__header-info">
                         <h2>{props.titre}</h2>
                         <div className="flex mt-[10px]">
-                            <img src={props.prof.Image} alt={props.prof.Prenom} className="profilPic"/>
-                            <p className="ml-[10px]">Avec {props.prof.Prenom}</p>
+                            <img src={props.prof.Image} alt={props.prof.Nom} className="profilPic"/>
+                            <p className="ml-[10px]">Avec {props.prof.Nom}</p>
                         </div>
                         <div className="flex mt-[10px]">
                             <ImLocation2/>
@@ -191,7 +193,7 @@ const AnnouncementPopup = (props) => {
                     </div>
                     <MdClose onClick={() => props.onClose()} className="announcement-popup__header-close" />
                 </div>
-                <div className="announcement-popup__body">
+                <div className="announcement-popup__body mb-[40px]">
                     <p>{props.description}</p>
                 </div>
                 <div class="py-5 px-5 h-5" >
@@ -209,7 +211,6 @@ const AnnouncementPopup = (props) => {
                                     className="rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 bg-primary focus:outline-none">
                                         Contacter</button>
                                 </form>
-
                             </div>
             </div>
         
