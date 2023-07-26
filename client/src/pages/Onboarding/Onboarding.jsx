@@ -14,31 +14,27 @@ import {AuthContext} from "../../services/auth";
 import "../../styles/main.scss";
 import Dropdown from "../../components/Dropdown/dropdown";
 
-import Select from "react-select";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-// Assume you have a list of cities in France
-const citiesInFrance = [
-    { value: 'paris', label: 'Paris' },
-    { value: 'marseille', label: 'Marseille' },
-    { value: 'lyon', label: 'Lyon' },
-    { value: 'toulouse', label: 'Toulouse' },
-    { value: 'nice', label: 'Nice' },
-    { value: 'nantes', label: 'Nantes' },
-    { value: 'strasbourg', label: 'Strasbourg' },
-    { value: 'montpellier', label: 'Montpellier' },
-    { value: 'bordeaux', label: 'Bordeaux' },
-    { value: 'lille', label: 'Lille' },
-    { value: 'rennes', label: 'Rennes' },
-    { value: 'reims', label: 'Reims' },
-    { value: 'le havre', label: 'Le Havre' },
-    { value: 'saint-etienne', label: 'Saint-Étienne' },
-    { value: 'toulon', label: 'Toulon' },
-    { value: 'angers', label: 'Angers' },
-    { value: 'grenoble', label: 'Grenoble' },
-    { value: 'dijon', label: 'Dijon' },
-    { value: 'nimes', label: 'Nîmes' },
-    { value: 'aix-en-provence', label: 'Aix-en-Provence' }
-];
+const LocationSearchInput = ({ onCitySelect }) => {
+    const handleSelect = (location) => {
+      onCitySelect(location.label);
+    }
+  
+    return (
+      <GooglePlacesAutocomplete
+        apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        selectProps={{
+          onChange: handleSelect,
+        }}
+        autocompletionRequest={{
+          types: ['(cities)'],
+          language: 'fr',
+        }}
+        
+      />
+    );
+};
 
 const Onboarding = () => {
     const [onboardingStudentPannel, setOnboardingStudentPannel] = useState(0);
@@ -63,17 +59,18 @@ const Onboarding = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState("");
 
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [city, setCity] = useState("");
+    const handleCitySelect = (selectedCity) => setCity(selectedCity);
 
     const register = async () => {
         let annonce = [];
         if (userType === "student") {
             annonce= [];
-        }else if(userType === "teacher"){
+        } else if(userType === "teacher"){
             addDoc(collection(database, "Annonces"), {
                 Titre: titreAnnonce,
                 Description: descAnnonce,
-                Lieu: selectedCity,
+                Lieu: city,
                 Image:"",
             }).then((docRef) => {
                 annonce.push(docRef.id);
@@ -148,7 +145,6 @@ const Onboarding = () => {
             setUser(auth.currentUser);
         });
     }, []);
-
 
     function nextPannelStudent(index){
         setOnboardingStudentPannel(index);
@@ -461,13 +457,7 @@ const Onboarding = () => {
                                                         onChange={(e) => setDescAnnonce(e.target.value)}
                                                         />
 
-                                                    <Select
-                                                        value={selectedCity}
-                                                        onChange={setSelectedCity}
-                                                        options={citiesInFrance}
-                                                        isSearchable
-                                                        placeholder="Select a city..."
-                                                    />
+                                                    <LocationSearchInput onCitySelect={handleCitySelect} />
 
                                                     <div className="flex gap-x-4">
                                                         <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
@@ -482,14 +472,6 @@ const Onboarding = () => {
                                         </div>
                                     )
                                     :null}
-                                {/*{onboardingTeacherPannel == 3 ? (*/}
-                                {/*    <div>*/}
-                                {/*        <h1>Plus que quelques détails...</h1>*/}
-                                {/*        <p>{titreAnnonce}</p>*/}
-                                {/*        <p>{descAnnonce}</p>*/}
-                                {/*    </div>*/}
-                                {/*    )*/}
-                                {/*    :null}*/}
                                 {onboardingTeacherPannel == 3 ? (
                                         <div className="my-[40px] flex flex-col items-center w-2/3">
                                             <div className="flex gap-x-[40px]">
@@ -570,6 +552,5 @@ const Onboarding = () => {
         </div>
     );
 };
-
 
 export default Onboarding;

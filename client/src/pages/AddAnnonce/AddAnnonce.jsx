@@ -18,14 +18,28 @@ import {HiCamera} from "react-icons/hi";
 import {MdClose, MdPhotoCamera} from "react-icons/md";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 
-import Select from "react-select";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-// Assume you have a list of cities in France
-const citiesInFrance = [
-    { label: "Paris", value: "Paris" },
-    { label: "Lyon", value: "Lyon" },
-    // ...more cities
-  ];
+console.log(process.env.REACT_APP_GOOGLE_API_KEY)
+
+const LocationSearchInput = ({ onCitySelect }) => {
+    const handleSelect = (location) => {
+      onCitySelect(location.label);
+    }
+  
+    return (
+      <GooglePlacesAutocomplete
+        apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        selectProps={{
+          onChange: handleSelect,
+        }}
+        autocompletionRequest={{
+          types: ['(cities)'],
+          language: 'fr',
+        }}
+      />
+    );
+};
 
 const AddAnnonce = () => {
     const userData = useContext(CurrentUserContext);
@@ -82,7 +96,7 @@ const AddAnnonce = () => {
             Titre: titreAnnonce,
             Description: descAnnonce,
             Image:image,
-            Lieu: selectedCity,
+            Lieu: city,
             Prof: {
                 Id: userData.userData.uid,
                 Image: userData.userData.image,
@@ -149,7 +163,8 @@ const AddAnnonce = () => {
         setOnboardingTeacherPannel(onboardingTeacherPannel+1)
     }
 
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [city, setCity] = useState("");
+    const handleCitySelect = (selectedCity) => setCity(selectedCity);
 
     return (
         <div className="flex flex-col items-center w-full h-full onboarding p-[60px]">
@@ -256,13 +271,7 @@ const AddAnnonce = () => {
                                                 onChange={(e) => setDescAnnonce(e.target.value)}
                                             />
 
-                                            <Select
-                                                value={selectedCity}
-                                                onChange={setSelectedCity}
-                                                options={citiesInFrance}
-                                                isSearchable
-                                                placeholder="Select a city..."
-                                            />
+                                            <LocationSearchInput onCitySelect={handleCitySelect} />
 
                                             <div className="flex gap-x-4">
                                                 <button className="btn-plain-return bg-white" onClick={()=>nextPannelTeacher(1)}>
