@@ -3,8 +3,12 @@ import React from 'react'
 let dummyProfilePic = "https://firebasestorage.googleapis.com/v0/b/crosskills-638ae.appspot.com/o/PngItem_5813504.png?alt=media&token=fedcb930-814e-4fa4-8301-502b5cc60674"
 
 
-function Contactitem({userData, createConversation, setActiveChat,chat}) {
-  console.log('userData', userData)
+function Contactitem({userData, setActiveChat,chat}) {
+  console.log('userData', chat)
+
+ const truncate = (input) =>
+      input?.length > 10 ? `${input.substring(0, 20)}...` : input;
+
   return (
     <div style={{ width: '100%', marginTop:10 }} onClick={() => {
       setActiveChat(chat)}}
@@ -15,7 +19,10 @@ function Contactitem({userData, createConversation, setActiveChat,chat}) {
               <div className='pl-2'>
                  <p className="text-sm ">{chat.userInfo.userType}</p>
               <p className="message text-secondary">{chat.userInfo.prenom} </p>
-          <div className="last-message">{chat.lastMessage.text}</div>
+              {/* truncate text of last message */}
+    
+          <div className="last-message"
+          > {truncate(chat.lastMessage.text)}</div>
                 </div>
             </div>
         </div>

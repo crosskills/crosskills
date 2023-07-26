@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { realtimeDatabase } from "../../services/firebase";
 import { ref, child, push, update, orderByChild, onValue } from "firebase/database";
 import { query } from 'firebase/firestore';
-const ChatWindow = ({ activeChat, userId, setActiveChat }) => {
+const ChatWindow = ({ activeChat, userId, setActiveChat,userImage, userName }) => {
     const [newMessage, setNewMessage] = useState("")
-
+console.log('activeChat.userInfo', activeChat.userInfo)
     const [messages, setMessages] = useState([
         { text: "Hello", sender: "test", timestamp: 123456789 },
         { text: "Hzeegeello", sender: "test", timestamp: 123456800 },
@@ -41,18 +41,17 @@ const ChatWindow = ({ activeChat, userId, setActiveChat }) => {
 
         return update(ref(realtimeDatabase), updates).then(() => {
             console.log("Message sent successfully!");
-        })
-            .catch((error) => {
+            setNewMessage("");
+        }).catch((error) => {
                 console.error("Error sending message: ", error);
             });
-        setNewMessage("");
     };
 
     return (
-        <div style={{ width: '50%', border: 'solid 1px blue' }}>
-            <div className="flex flex-row">
-
-                <img className='h-20 w-20 rounded-full m-auto' src='https://i.ibb.co/YZpLJ2y/Adil-Baltazare-Minimized.png' />
+        <div style={{ width: '50%', height:'100%',  overflowX:'hidden'}} className="bg-gray rounded">
+            <div  style={{ height:100, position:'fixed', top:0, padding:8, width:'100%'}} className='bg-gray'>
+                <img className='h-20 w-20 rounded-full m-auto' src={activeChat.userInfo.image ? activeChat.userInfo.image  : 'https://i.ibb.co/YZpLJ2y/Adil-Baltazare-Minimized.png'} style={{position:'fixed',right:'70%'}} />
+                <p style={{textAlign:'start', margin:"auto"}}>{activeChat.userInfo.prenom}</p>
                 <button onClick={() => { setActiveChat() }}>
                     <svg fill="none" viewBox="0 0 24 24" height="2em" width="2em" >
                         <path
@@ -65,22 +64,18 @@ const ChatWindow = ({ activeChat, userId, setActiveChat }) => {
             {
                 activeChat ? (
                     <>
-                        <div className="messages" style={{ width: '100%', height: '50%' }}>
-                            <div class="w-full px-5 flex flex-col justify-between">
+                        <div className="messages" style={{ width: '100%', paddingTop:150, paddingBottom:150}}>
+                            <div class="w-full px-5 flex flex-col justify-between" style={{}}>
                                 {Object.keys(messages)
                                     .map((messageID) => messages[messageID])
                                     .sort((a, b) => a.timestamp - b.timestamp)
                                     .map((message) => {
 
                                         return (
-
-
-
-
                                             <>
                                                 <div class="flex flex-col mt-5">
                                                     <div key={message.id} class={`flex mb-4 justify-end items-end ${message.sender === userId ? '' : 'flex-row-reverse  '} `}>
-                                                    <p class="text-xs text-gray ml-2 mr-2 self-end">{new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                                                    <p class="text-xs  ml-2 mr-2 self-end">{new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                                                         <div
                                                             className={`${message.sender === userId ? 'bg-sky  mr-2 py-3 px-4 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary ' :
                                                                 'ml-2 py-3 px-4  bg-primary rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white'} `}>
@@ -100,7 +95,9 @@ const ChatWindow = ({ activeChat, userId, setActiveChat }) => {
                                         );
                                     })}
                             </div>
-                            <div class="py-5 px-5">
+                            
+                        </div>
+                        <div class="py-5 px-5" style={{position:'fixed', bottom:0, background:'white', width:'100%'}}>
                                 <form className="send-message" onSubmit={handleSubmit}>
                                     <input
                                         class="w-full bg-sky py-5 px-3 rounded-xl"
@@ -113,8 +110,6 @@ const ChatWindow = ({ activeChat, userId, setActiveChat }) => {
                                 </form>
 
                             </div>
-                        </div>
-
 
 
                     </>

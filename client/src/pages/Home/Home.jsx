@@ -20,6 +20,7 @@ import ChatSideBar from "../../components/Chat/ChatSideBar";
 import { MdClose } from 'react-icons/md';
 import { ImLocation2 } from 'react-icons/im';
 import { Navbar, SmallAnnouncement } from "../../components";
+import { createConversation } from "../../components/Chat/ChatFunctions";
 
 
 const Home = () => {
@@ -79,12 +80,11 @@ const Home = () => {
                             ? announcements.map((announcement) => (
                                 <SmallAnnouncement
                                     key={announcement.id}
-
                                     titre={announcement.Titre}
                                     image={announcement.Image}
                                     lieu={announcement.Lieu}
                                     prof={announcement.Prof}
-
+                                    currentUserId = {userData.userData.uid}
                                     onClick={() => handlePopupOpen(announcement)}
                                 />
                             ))
@@ -144,6 +144,8 @@ const Home = () => {
 
 
 const AnnouncementPopup = (props) => {
+    const [newMessage, setNewMessage] = useState(`Bonjour ${props.prof.Nom}, je suis intéressé par votre cours!`)
+    const userData = useContext(CurrentUserContext);
 
     const handleClose = (e) => {
         if (e.target === e.currentTarget) {
@@ -156,7 +158,14 @@ const AnnouncementPopup = (props) => {
             props.onClose();
         }
     }
-
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('props.currentUserId', userData.uid)
+       createConversation(userData.userData.uid, props.prof.Id, newMessage)
+       handleClose(e)
+      }
+      
     useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
         return () => {
@@ -185,8 +194,25 @@ const AnnouncementPopup = (props) => {
                 <div className="announcement-popup__body">
                     <p>{props.description}</p>
                 </div>
-            </div>
+                <div class="py-5 px-5 h-5" >
+                    <form className="send-message relative flex" 
+                                onSubmit={handleSubmit}
+                                >
+                                    <input
+                                        class="w-full bg-sky py-5 px-3 rounded-xl"
+                                        type="text"
+                                        value={newMessage}
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                        placeholder="Ecrivez un message..."
+                                    />
+                                    <button type="submit"
+                                    className="rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 bg-primary focus:outline-none">
+                                        Contacter</button>
+                                </form>
 
+                            </div>
+            </div>
+        
         </div>
     );
 }
