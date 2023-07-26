@@ -41,18 +41,18 @@ h3{
 }
 
 h4{
-    font-size: 1.2rem;
-    font-weight: 700;
-    font-family: Montserrat;
-    color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Montserrat;
+  color: black;
   text-transform: uppercase;
 }
 .title-hero{
-    font-size: 3.5rem;
-    line-height: 3.5rem;
-    font-weight: 900;
-    font-family: Montserrat;
-    color: black;
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+  font-weight: 900;
+  font-family: Montserrat;
+  color: black;
   @media screen and (max-width: 768px) {
     font-size: 2rem;
     line-height: 2rem;
@@ -61,10 +61,10 @@ h4{
 }
 
 .subtitle{
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-family: Montserrat;
-    color: black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Montserrat;
+  color: black;
   @media screen and (max-width: 768px) {
     font-size: 1rem;
     text-align: center;
@@ -82,4 +82,47 @@ h4{
   to {
     transform: rotate(360deg);
   }
+}
+
+.sidebar {
+  width: 50vw;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: -75vw;
+  overflow-x: hidden;
+  margin-top: 20px;
+  padding-top: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 24px;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+
+.sidebar-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 0px;
+  padding: 10px;
+  transition: right 0.3s ease-in-out;
+}
+
+.contacts-item{
+  background-color: rgba(45, 105, 209, 0.17);
+  margin-left: 10px;
+  padding: 10px;
+  flex-direction: row;
+}
+.contacts-item img{
+  width: 80x;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+
+  
 }
