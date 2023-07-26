@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { realtimeDatabase, database, } from "../../services/firebase";
 import { ref, orderByChild, query, equalTo, onValue, update, push } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
-
+import { createConversation } from './ChatFunctions';
 import ChatWindow from './ChatWindow';
 import Contactitem from './Contactitem';
 
@@ -13,7 +13,6 @@ const ChatSidebar = ({ userData }) => {
   const [contacts, setContacts] = useState([])
   const [conversations, setConversations] = useState([])
 
-  // a enlever ensuite
   const [newMessage, setNewMessage] = useState("")
   const [participant2, setParticipant2] = useState("")
 
@@ -65,7 +64,7 @@ const ChatSidebar = ({ userData }) => {
 
   const displayContactList = () => {
     return chats.map((chat) => (
-      <Contactitem userData={userData} createConversation={createConversation} setActiveChat={setActiveChat} chat={chat} />
+      <Contactitem userData={userData}  setActiveChat={setActiveChat} chat={chat} />
     ))
 
   }
@@ -75,36 +74,6 @@ const ChatSidebar = ({ userData }) => {
   };
 
 
-  function createConversation(participant1, participant2, textToSend) {
-    //  if (verifyIfExist(participant1, participant2)) {
-    //     return;
-    //  }
-    //  else {
-    const newConversationKey = push(ref(realtimeDatabase, 'conversations')).key;
-
-    const message = {
-      sender: participant1,
-      text: textToSend,
-      timestamp: Date.now()
-    }
-    const conversationData = {
-      conversationID: newConversationKey,
-      participants: {
-        [participant1]: true,
-        [participant2]: true
-      },
-      lastMessage: message,
-      messages: {
-        message1: message
-      }
-    };
-
-    const updates = {};
-    updates[`/conversations/${newConversationKey}`] = conversationData;
-
-    return update(ref(realtimeDatabase), updates);
-    //}
-  }
 
   // const verifyIfExist = (participant1, participant2) => {
   //    //veryfieng if the conversation already exists
@@ -130,20 +99,25 @@ const ChatSidebar = ({ userData }) => {
 
   return (
     <>
-      <div className={`flex flex-row sidebar ${isOpen ? 'open' : ''}`}>
+      <div className={`flex flex-row sidebar ${isOpen ? 'open' : ''} bg-gray`}>
 
 
         {activeChat ?
           (
-            <ChatWindow activeChat={activeChat} userId={userData.uid} setActiveChat={setActiveChat} />
+            <ChatWindow 
+            activeChat={activeChat}
+            userId={userData.uid}
+            setActiveChat={setActiveChat}
+            userImage={userData.image}
+            userName={userData.prenom}/>
 
           ) :
-          <div style={{ border: 'solid 1px red', width: '50%' }}>
-            <form className="send-message" onSubmit={handleSubmit} >
+          <div style={{ width: '50%' }}>
+            {/* <form className="send-message" onSubmit={handleSubmit} >
               <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Ecrire un message" />
               <input type="text" value={participant2} onChange={(e) => setParticipant2(e.target.value)} placeholder="uid du destinataire" />
               <button type="submit">Envoyer</button>
-            </form>
+            </form> */}
 
 
             <div >
@@ -154,7 +128,7 @@ const ChatSidebar = ({ userData }) => {
         }
       </div >
 
-      <button className={` sidebar-toggle ${isOpen ? 'open bg-primary '  : 'bg-sky '}`} onClick={handleToggleSidebar}>
+      <button className={` sidebar-toggle ${isOpen ? 'open bg-primary '  : 'bg-sky '} border border-primary`} onClick={handleToggleSidebar}>
 
         <svg class={`h-8 w-8 ${isOpen ? 'text-white' : 'text-black'} `} width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4" />  <line x1="12" y1="11" x2="12" y2="11.01" />  <line x1="8" y1="11" x2="8" y2="11.01" />  <line x1="16" y1="11" x2="16" y2="11.01" /></svg>
       </button>
